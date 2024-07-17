@@ -1,0 +1,8 @@
+# Text files
+*.txt
+
+# zip files
+*.zip
+
+# git repo
+openfaas-node20-template/
