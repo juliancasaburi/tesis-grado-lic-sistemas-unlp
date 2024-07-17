@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >
+  SAM Template for tesina-encode Lambda function
+
+Resources:
+  TesinaEncodeFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/handlers/app.lambdaHandler
+      Runtime: nodejs20.x
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 10
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        TesinaEncodeApi:
+          Type: Api
+          Properties:
+            Path: /tesina-encode-lambda
+            Method: post
+
+Outputs:
+  TesinaEncodeApi:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/tesina-encode-lambda/"

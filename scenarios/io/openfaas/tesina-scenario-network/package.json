@@ -1,0 +1,17 @@
+{
+  "name": "tesina-scenario-network-openfaas",
+  "version": "1.0.0",
+  "description": "Tesina Network Scenario OpenFaaS Function",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": "Julián Casaburi",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/util-dynamodb": "^3.0.0",
+    "uuid": "^8.3.2"
+  }
+}

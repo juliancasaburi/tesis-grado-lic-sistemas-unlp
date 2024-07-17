@@ -1,0 +1,12 @@
+{
+    "name": "tesina-encode",
+    "version": "1.0.0",
+    "description": "A simple Lambda function to encode text to base64.",
+    "main": "src/handlers/app.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Julian Casaburi",
+    "license": "ISC"
+  }
+  

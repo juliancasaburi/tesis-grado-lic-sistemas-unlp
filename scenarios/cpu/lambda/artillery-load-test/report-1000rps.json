@@ -1,0 +1,232 @@
+{
+  "aggregate": {
+    "counters": {
+      "vusers.created_by_name.0": 5000,
+      "vusers.created": 5000,
+      "http.requests": 5000,
+      "http.codes.200": 115,
+      "http.responses": 115,
+      "http.downloaded_bytes": 684135,
+      "plugins.metrics-by-endpoint./tesina-scenario-cpu.codes.200": 115,
+      "vusers.failed": 4885,
+      "vusers.completed": 115,
+      "plugins.metrics-by-endpoint./tesina-scenario-cpu.errors.ETIMEDOUT": 4885,
+      "errors.ETIMEDOUT": 4885
+    },
+    "rates": {
+      "http.request_rate": 505
+    },
+    "firstCounterAt": 1713357403355,
+    "firstHistogramAt": 1713357403511,
+    "lastCounterAt": 1713357419045,
+    "lastHistogramAt": 1713357409061,
+    "firstMetricAt": 1713357403355,
+    "lastMetricAt": 1713357419045,
+    "period": 1713357410000,
+    "summaries": {
+      "http.response_time": {
+        "min": 49,
+        "max": 79,
+        "count": 115,
+        "mean": 59.3,
+        "p50": 58.6,
+        "median": 58.6,
+        "p75": 62.2,
+        "p90": 66,
+        "p95": 67.4,
+        "p99": 71.5,
+        "p999": 73
+      },
+      "plugins.metrics-by-endpoint.response_time./tesina-scenario-cpu": {
+        "min": 49,
+        "max": 79,
+        "count": 115,
+        "mean": 59.3,
+        "p50": 58.6,
+        "median": 58.6,
+        "p75": 62.2,
+        "p90": 66,
+        "p95": 67.4,
+        "p99": 71.5,
+        "p999": 73
+      },
+      "vusers.session_length": {
+        "min": 127.9,
+        "max": 5323,
+        "count": 115,
+        "mean": 2719.2,
+        "p50": 5168,
+        "median": 5168,
+        "p75": 5272.4,
+        "p90": 5272.4,
+        "p95": 5272.4,
+        "p99": 5272.4,
+        "p999": 5272.4
+      }
+    },
+    "histograms": {
+      "http.response_time": {
+        "min": 49,
+        "max": 79,
+        "count": 115,
+        "mean": 59.3,
+        "p50": 58.6,
+        "median": 58.6,
+        "p75": 62.2,
+        "p90": 66,
+        "p95": 67.4,
+        "p99": 71.5,
+        "p999": 73
+      },
+      "plugins.metrics-by-endpoint.response_time./tesina-scenario-cpu": {
+        "min": 49,
+        "max": 79,
+        "count": 115,
+        "mean": 59.3,
+        "p50": 58.6,
+        "median": 58.6,
+        "p75": 62.2,
+        "p90": 66,
+        "p95": 67.4,
+        "p99": 71.5,
+        "p999": 73
+      },
+      "vusers.session_length": {
+        "min": 127.9,
+        "max": 5323,
+        "count": 115,
+        "mean": 2719.2,
+        "p50": 5168,
+        "median": 5168,
+        "p75": 5272.4,
+        "p90": 5272.4,
+        "p95": 5272.4,
+        "p99": 5272.4,
+        "p999": 5272.4
+      }
+    }
+  },
+  "intermediate": [
+    {
+      "counters": {
+        "vusers.created_by_name.0": 5000,
+        "vusers.created": 5000,
+        "http.requests": 5000,
+        "http.codes.200": 115,
+        "http.responses": 115,
+        "http.downloaded_bytes": 684135,
+        "plugins.metrics-by-endpoint./tesina-scenario-cpu.codes.200": 115,
+        "vusers.failed": 0,
+        "vusers.completed": 115
+      },
+      "rates": {
+        "http.request_rate": 1000
+      },
+      "http.request_rate": null,
+      "firstCounterAt": 1713357403355,
+      "firstHistogramAt": 1713357403511,
+      "lastCounterAt": 1713357409061,
+      "lastHistogramAt": 1713357409061,
+      "firstMetricAt": 1713357403355,
+      "lastMetricAt": 1713357409061,
+      "period": "1713357400000",
+      "summaries": {
+        "http.response_time": {
+          "min": 49,
+          "max": 79,
+          "count": 115,
+          "mean": 59.3,
+          "p50": 58.6,
+          "median": 58.6,
+          "p75": 62.2,
+          "p90": 66,
+          "p95": 67.4,
+          "p99": 71.5,
+          "p999": 73
+        },
+        "plugins.metrics-by-endpoint.response_time./tesina-scenario-cpu": {
+          "min": 49,
+          "max": 79,
+          "count": 115,
+          "mean": 59.3,
+          "p50": 58.6,
+          "median": 58.6,
+          "p75": 62.2,
+          "p90": 66,
+          "p95": 67.4,
+          "p99": 71.5,
+          "p999": 73
+        },
+        "vusers.session_length": {
+          "min": 127.9,
+          "max": 5323,
+          "count": 115,
+          "mean": 2719.2,
+          "p50": 5168,
+          "median": 5168,
+          "p75": 5272.4,
+          "p90": 5272.4,
+          "p95": 5272.4,
+          "p99": 5272.4,
+          "p999": 5272.4
+        }
+      },
+      "histograms": {
+        "http.response_time": {
+          "min": 49,
+          "max": 79,
+          "count": 115,
+          "mean": 59.3,
+          "p50": 58.6,
+          "median": 58.6,
+          "p75": 62.2,
+          "p90": 66,
+          "p95": 67.4,
+          "p99": 71.5,
+          "p999": 73
+        },
+        "plugins.metrics-by-endpoint.response_time./tesina-scenario-cpu": {
+          "min": 49,
+          "max": 79,
+          "count": 115,
+          "mean": 59.3,
+          "p50": 58.6,
+          "median": 58.6,
+          "p75": 62.2,
+          "p90": 66,
+          "p95": 67.4,
+          "p99": 71.5,
+          "p999": 73
+        },
+        "vusers.session_length": {
+          "min": 127.9,
+          "max": 5323,
+          "count": 115,
+          "mean": 2719.2,
+          "p50": 5168,
+          "median": 5168,
+          "p75": 5272.4,
+          "p90": 5272.4,
+          "p95": 5272.4,
+          "p99": 5272.4,
+          "p999": 5272.4
+        }
+      }
+    },
+    {
+      "counters": {
+        "plugins.metrics-by-endpoint./tesina-scenario-cpu.errors.ETIMEDOUT": 4885,
+        "errors.ETIMEDOUT": 4885,
+        "vusers.failed": 4885
+      },
+      "rates": {},
+      "firstCounterAt": 1713357413739,
+      "lastCounterAt": 1713357419045,
+      "firstMetricAt": 1713357413739,
+      "lastMetricAt": 1713357419045,
+      "period": "1713357410000",
+      "summaries": {},
+      "histograms": {}
+    }
+  ]
+}
