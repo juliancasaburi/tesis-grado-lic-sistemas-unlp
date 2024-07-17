@@ -1,0 +1,11 @@
+config:
+  target: 'https://6biazfwasmvizok7mzn25h65ja0gkovk.lambda-url.sa-east-1.on.aws'
+  phases:
+    - duration: 600
+      arrivalRate: 400
+      name: "Phase 4 - 400 RPS for 10 minutes"
+
+scenarios:
+  - flow:
+      - get:
+          url: "/"

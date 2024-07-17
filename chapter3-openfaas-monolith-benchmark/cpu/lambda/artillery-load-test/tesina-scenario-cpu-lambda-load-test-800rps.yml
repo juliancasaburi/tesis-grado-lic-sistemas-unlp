@@ -1,0 +1,11 @@
+config:
+  target: 'https://ozy4a0via1.execute-api.sa-east-1.amazonaws.com'
+  phases:
+    - duration: 600
+      arrivalRate: 800
+      name: "Phase 5 - 800 RPS for 10 minutes"
+
+scenarios:
+  - flow:
+      - get:
+          url: "/tesina-scenario-cpu"
