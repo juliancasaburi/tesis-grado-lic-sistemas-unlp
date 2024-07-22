@@ -56,7 +56,6 @@ breakeven_lambda_ec2_basic_with_cloudwatch = find_intersection(lambda_cost, ec2_
 breakeven_lambda_ec2_basic_without_cloudwatch = find_intersection(lambda_cost, ec2_basic_cost_without_cloudwatch)
 breakeven_lambda_ec2_ha = find_intersection(lambda_cost, ec2_ha_cost)
 
-
 # Plotting
 plt.figure(figsize=(12, 8))
 
@@ -73,24 +72,21 @@ plt.plot(rps_values, ec2_basic_costs_without_cloudwatch, label='EC2 Basic', line
 plt.plot(rps_values, ec2_ha_costs, label='EC2 High Availability', linestyle=':', color='blue')
 
 # Annotations for breakeven points
-plt.annotate(f'Breakeven EC2 Basic: {breakeven_lambda_ec2_basic_without_cloudwatch} RPS',
+plt.annotate(f'Breakeven EC2 Basic: {breakeven_lambda_ec2_basic_without_cloudwatch} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_basic_without_cloudwatch):.2f}',
              xy=(breakeven_lambda_ec2_basic_without_cloudwatch, lambda_cost(breakeven_lambda_ec2_basic_without_cloudwatch)),
-             xytext=(breakeven_lambda_ec2_basic_without_cloudwatch + 200, lambda_cost(breakeven_lambda_ec2_basic_without_cloudwatch) - 20),
-             arrowprops=dict(facecolor='black', arrowstyle='->'),
-             )
+             xytext=(breakeven_lambda_ec2_basic_without_cloudwatch + 200, lambda_cost(breakeven_lambda_ec2_basic_without_cloudwatch) + 10),
+             arrowprops=dict(facecolor='black', arrowstyle='->'))
 
-plt.annotate(f'Breakeven EC2 Basic + CloudWatch: {breakeven_lambda_ec2_basic_with_cloudwatch} RPS',
+plt.annotate(f'Breakeven EC2 Basic + CloudWatch: {breakeven_lambda_ec2_basic_with_cloudwatch} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_basic_with_cloudwatch):.2f}',
              xy=(breakeven_lambda_ec2_basic_with_cloudwatch, lambda_cost(breakeven_lambda_ec2_basic_with_cloudwatch)),
              xytext=(breakeven_lambda_ec2_basic_with_cloudwatch + 200, lambda_cost(breakeven_lambda_ec2_basic_with_cloudwatch) + 50),
              arrowprops=dict(facecolor='black', arrowstyle='->'),
-             rotation=5,
-             )
+             rotation=5)
 
-plt.annotate(f'Breakeven EC2 High Availability: {breakeven_lambda_ec2_ha} RPS',
+plt.annotate(f'Breakeven EC2 High Availability: {breakeven_lambda_ec2_ha} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha):.2f}',
              xy=(breakeven_lambda_ec2_ha, lambda_cost(breakeven_lambda_ec2_ha)),
              xytext=(breakeven_lambda_ec2_ha + 200, lambda_cost(breakeven_lambda_ec2_ha) + 300),
-             arrowprops=dict(facecolor='black', arrowstyle='->'),
-             )
+             arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 plt.xlabel('Requests Per Second (RPS)')
 plt.ylabel('Monthly Cost (USD)')
