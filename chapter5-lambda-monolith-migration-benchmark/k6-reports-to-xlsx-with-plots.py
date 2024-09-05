@@ -106,7 +106,7 @@ def main():
 
     print(f"Generating images")
     for architecture_env, group in avg_response_times.groupby(['Architecture']):
-        architecture_str = architecture_env  # Ensure architecture is a string if it's not already
+        architecture_str = architecture_env[0]
         group['RPS (Requests per Second)'] = group['RPS (Requests per Second)'].astype(str)  # Convert to string for sorting
         group = group.sort_values(by='RPS (Requests per Second)', key=lambda x: x.map(custom_sort_key))
 
@@ -119,7 +119,7 @@ def main():
         ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         ax.grid(True)
         fig.subplots_adjust(left=0.1, right=0.75, bottom=0.1, top=0.9)
-        fig.savefig(f'{architecture_str[0].replace("/", "_")}_average_mean_plot.png', bbox_inches='tight')
+        fig.savefig(f'{architecture_str.replace("/", "_")}_average_mean_plot.png', bbox_inches='tight')
         plt.close(fig)
 
         fig, ax = plt.subplots(figsize=(10, 10))
@@ -131,12 +131,12 @@ def main():
         ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         ax.grid(True)
         fig.subplots_adjust(left=0.1, right=0.75, bottom=0.1, top=0.9)
-        fig.savefig(f'{architecture_str[0].replace("/", "_")}_p99_plot.png', bbox_inches='tight')
+        fig.savefig(f'{architecture_str.replace("/", "_")}_p99_plot.png', bbox_inches='tight')
         plt.close(fig)
 
     print(f"Generating latency measurement images")
     for architecture_env, group in results_df.groupby(['Architecture']):
-        architecture_str = architecture_env  # Ensure architecture is a string if it's not already
+        architecture_str = architecture_env[0]
         fig, ax = plt.subplots(figsize=(10, 10))
 
         for index, row in group.iterrows():
@@ -149,7 +149,7 @@ def main():
         ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
         ax.grid(True)
         fig.subplots_adjust(left=0.1, right=0.75, bottom=0.1, top=0.9)
-        fig.savefig(f'{architecture_str[0].replace("/", "_")}_all_latency_plot.png', bbox_inches='tight')
+        fig.savefig(f'{architecture_str.replace("/", "_")}_all_latency_plot.png', bbox_inches='tight')
         plt.close(fig)
 
 if __name__ == "__main__":
