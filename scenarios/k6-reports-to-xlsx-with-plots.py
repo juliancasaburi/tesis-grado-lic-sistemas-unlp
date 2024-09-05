@@ -93,10 +93,11 @@ def main():
         results_df = pd.concat([results_df, temp_df], ignore_index=True)
         os.remove(temp_csv)
 
-    avg_response_times = results_df.groupby(['Scenario', 'Environment', 'VU (Virtual Users)'])[['Mean Response Time', 'P99 Response Time']].mean().reset_index()
+    avg_response_times = results_df.groupby(['Scenario', 'Environment', 'VU (Virtual Users)'])[['Mean Response Time', 'P99 Response Time', 'Max Response Time']].mean().reset_index()
     avg_response_times.rename(columns={
         'Mean Response Time': 'Mean Response Time (Average per scenario + environment + VU)',
-        'P99 Response Time': 'P99 Response Time (Average per scenario + environment + VU)'
+        'P99 Response Time': 'P99 Response Time (Average per scenario + environment + VU)',
+        'Max Response Time': 'Max Response Time (Average per scenario + environment + VU)'
     }, inplace=True)
 
     results_df = pd.merge(results_df, avg_response_times, on=['Scenario', 'Environment', 'VU (Virtual Users)'], how='left')
@@ -133,6 +134,18 @@ def main():
         ax.grid(True)
         fig.subplots_adjust(left=0.1, right=0.75, bottom=0.1, top=0.9)
         fig.savefig(f'{scenario.replace("/", "_")}_{environment}_p99_plot.png', bbox_inches='tight')
+        plt.close(fig)
+
+        fig, ax = plt.subplots(figsize=(10, 10))
+        for index, row in group.iterrows():
+            ax.plot(row['VU (Virtual Users)'], row['Max Response Time (Average per scenario + environment + VU)'], marker='^', label=f"{scenario}/{environment} ({row['VU (Virtual Users)']} VU)")
+            ax.text(row['VU (Virtual Users)'], row['Max Response Time (Average per scenario + environment + VU)'], f"{row['Max Response Time (Average per scenario + environment + VU)']:.2f}", ha='center', va='top')
+        ax.set_xlabel('VU (Virtual Users)')
+        ax.set_ylabel('Max Response Time in ms (Average per scenario + environment + VU)')
+        ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        ax.grid(True)
+        fig.subplots_adjust(left=0.1, right=0.75, bottom=0.1, top=0.9)
+        fig.savefig(f'{scenario.replace("/", "_")}_{environment}_max_plot.png', bbox_inches='tight')
         plt.close(fig)
 
     print(f"Generating latency measurement images")
