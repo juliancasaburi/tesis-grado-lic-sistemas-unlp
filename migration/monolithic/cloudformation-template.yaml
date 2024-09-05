@@ -10,20 +10,22 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22              # SSH port
           ToPort: 22                # SSH port
-          CidrIp: 0.0.0.0/0         # Open to the world (adjust as necessary)
+          CidrIp: 0.0.0.0/0         # Open to the world
         - IpProtocol: tcp
           FromPort: 3000            # Application port
           ToPort: 3000              # Application port
-          CidrIp: 0.0.0.0/0         # Open to the world (adjust as necessary)
+          CidrIp: 0.0.0.0/0         # Open to the world
 
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t3.medium
-      ImageId: ami-0b72821e2f351e396  # Your specified AMI ID
-      KeyName: ec2                   # Your specified key pair name
+      InstanceType: t3.small
+      CreditSpecification:
+        CPUCredits: standard        # Standard CPU credits (not unlimited https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html)
+      ImageId: ami-0b72821e2f351e396
+      KeyName: ec2
       SecurityGroupIds:
-        - !Ref EC2SecurityGroup      # Reference to the newly created security group
+        - !Ref EC2SecurityGroup     # Reference to the newly created security group
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
