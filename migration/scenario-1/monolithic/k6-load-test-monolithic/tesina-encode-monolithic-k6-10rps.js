@@ -14,7 +14,7 @@ export let options = {
 };
 
 export default function () {
-  const url = 'https://c7itsddefi.execute-api.us-east-1.amazonaws.com/prod/encode';
+  const url = 'https://ryz6r0xfda.execute-api.us-east-1.amazonaws.com/prod/encode';
   const payload = JSON.stringify({ text: 'Hello, World!' });
   const params = {
     headers: {
