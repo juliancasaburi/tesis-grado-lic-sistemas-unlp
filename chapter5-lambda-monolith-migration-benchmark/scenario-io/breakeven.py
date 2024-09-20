@@ -3,7 +3,9 @@ import numpy as np
 from scipy.optimize import fsolve
 
 # Constants
-SECONDS_IN_MONTH = 730 * 60 * 60  # According to AWS's calculator
+HOURS_PER_MONTH = 730  # Average hours per month according to AWS's calculator
+SECONDS_IN_MONTH = HOURS_PER_MONTH * 60 * 60
+LCU_COST_PER_HOUR = 0.008  # Cost per LCU per hour in dollars
 
 # AWS Lambda costs (N.Virginia us-east-1 region)
 LAMBDA_REQUEST_COST_PER_MILLION = 0.20  # Cost per 1 million requests
@@ -24,15 +26,29 @@ EC2_BASIC_MONTHLY_COST_ON_DEMAND = 7.64  # t3.micro instance cost for on-demand 
 EC2_HA_MONTHLY_COST_RESERVED = EC2_BASIC_MONTHLY_COST_RESERVED * 2  # High Availability (HA) EC2 with reserved pricing
 EC2_HA_MONTHLY_COST_ON_DEMAND = EC2_BASIC_MONTHLY_COST_ON_DEMAND * 2  # HA EC2 with on-demand pricing
 
-ELB_COST = 16.43  # Monthly fixed cost for Application Load Balancer (ALB)
+ALB_FIXED_MONTHLY_COST = 16.43  # Monthly fixed cost for Application Load Balancer (ALB)
 
 # CloudWatch costs (N.Virginia us-east-1 region)
 CLOUDWATCH_LOGGING_COST_PER_RPS = 0  # Example cost per RPS for CloudWatch logging
 
+def calculate_alb_cost(rps):
+    # Calculate LCUs
+    processed_bytes_lcus = 1  # 1 GB per hour / 1 GB processed bytes per hour per LCU
+    new_connections_lcus = rps / 25  # rps new connections per second / 25 new connections per second per LCU
+    active_connections_lcus = (rps * 1) / 3000  # rps active connections / 3000 connections per LCU
+    paid_rules_lcus = max(-9, 0)  # Max (-9 paid rules per request, 0)
+
+    # Determine the maximum LCUs
+    max_lcus = max(processed_bytes_lcus, new_connections_lcus, active_connections_lcus, paid_rules_lcus)
+
+    # Calculate monthly ALB cost
+    alb_monthly_cost = 1 * max_lcus * LCU_COST_PER_HOUR * HOURS_PER_MONTH
+    return alb_monthly_cost
+
 # Calculate Lambda cost with tiered pricing
 def lambda_cost(rps):
     # Compute the number of requests per month
-    monthly_requests = rps * SECONDS_IN_MONTH  # total requests
+    monthly_requests = np.float32(rps) * np.float32(SECONDS_IN_MONTH)
 
     # Memory allocation and execution time
     memory_gb = LAMBDA_MEMORY_MB / 1024  # Convert MB to GB
@@ -42,13 +58,21 @@ def lambda_cost(rps):
     # Total GB-seconds for compute
     total_gb_seconds = total_compute_seconds * memory_gb
 
-    # Compute cost based on tiered pricing
-    compute_cost = total_gb_seconds * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_1  # Since 106K GB-seconds is in tier 1
+    # Calculate compute cost based on tiered pricing
+    if total_gb_seconds <= TIER_1_LIMIT:
+        compute_cost = total_gb_seconds * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_1
+    elif total_gb_seconds <= TIER_3_LIMIT:
+        tier_1_cost = TIER_1_LIMIT * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_1
+        tier_2_cost = (total_gb_seconds - TIER_1_LIMIT) * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_2
+        compute_cost = tier_1_cost + tier_2_cost
+    else:
+        tier_1_cost = TIER_1_LIMIT * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_1
+        tier_2_cost = (TIER_3_LIMIT - TIER_1_LIMIT) * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_2
+        tier_3_cost = (total_gb_seconds - TIER_3_LIMIT) * LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_3
+        compute_cost = tier_1_cost + tier_2_cost + tier_3_cost
 
     # Request cost
     request_cost = monthly_requests * LAMBDA_REQUEST_COST_PER_MILLION / 1_000_000  # Calculate request cost
-
-    print("RPS: ", rps, "Total compute seconds:", total_compute_seconds, "Total GB-seconds: ", total_gb_seconds, "Compute Cost: ", compute_cost, "Request Cost: ", request_cost, "Total Cost: ", request_cost + compute_cost)
 
     return compute_cost + request_cost
 
@@ -65,15 +89,15 @@ def ec2_basic_cost_with_cloudwatch_on_demand(rps):
 # Calculate EC2 high availability cost with CloudWatch (Reserved)
 def ec2_ha_cost_reserved(rps):
     cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_HA_MONTHLY_COST_RESERVED + ELB_COST + cloudwatch_cost
+    return EC2_HA_MONTHLY_COST_RESERVED + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
 
 # Calculate EC2 high availability cost with CloudWatch (On-Demand)
 def ec2_ha_cost_on_demand(rps):
     cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_HA_MONTHLY_COST_ON_DEMAND + ELB_COST + cloudwatch_cost
+    return EC2_HA_MONTHLY_COST_ON_DEMAND + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
 
 # Generate data
-rps_values = np.arange(0, 1001, 50)  # From 0 to 1000 RPS, incrementing by 50
+rps_values = np.arange(0, 201, 25)  # From 0 to 200 RPS, incrementing by 25
 lambda_costs = np.array([lambda_cost(rps) for rps in rps_values])
 ec2_basic_costs_with_cloudwatch_reserved = np.array([ec2_basic_cost_with_cloudwatch_reserved(rps) for rps in rps_values])
 ec2_basic_costs_with_cloudwatch_on_demand = np.array([ec2_basic_cost_with_cloudwatch_on_demand(rps) for rps in rps_values])
@@ -82,7 +106,7 @@ ec2_ha_costs_on_demand = np.array([ec2_ha_cost_on_demand(rps) for rps in rps_val
 
 # Define the intersection function
 def find_intersection(func1, func2):
-    return int(fsolve(lambda x: func1(x) - func2(x), 500)[0])
+    return int(fsolve(lambda x: func1(x) - func2(x), 250)[0])
 
 # Finding breakeven points
 breakeven_lambda_ec2_basic_reserved = find_intersection(lambda_cost, ec2_basic_cost_with_cloudwatch_reserved)
@@ -96,12 +120,6 @@ plt.figure(figsize=(12, 8))
 # Lambda Costs
 plt.plot(rps_values, lambda_costs, label='AWS Lambda', linestyle='--', color='orange')
 
-# EC2 Basic Costs with CloudWatch (Reserved)
-plt.plot(rps_values, ec2_basic_costs_with_cloudwatch_reserved, label='EC2 Basic (Reserved)', linestyle='-', color='green')
-
-# EC2 Basic Costs with CloudWatch (On-Demand)
-plt.plot(rps_values, ec2_basic_costs_with_cloudwatch_on_demand, label='EC2 Basic (On-Demand)', linestyle='-', color='red')
-
 # EC2 HA Costs (Reserved)
 plt.plot(rps_values, ec2_ha_costs_reserved, label='EC2 High Availability (Reserved)', linestyle=':', color='blue')
 
@@ -111,12 +129,12 @@ plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (On-De
 # Annotations for breakeven points
 plt.annotate(f'Breakeven EC2 HA Reserved: {breakeven_lambda_ec2_ha_reserved} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha_reserved):.2f}',
              xy=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved)),
-             xytext=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved) + 300),
+             xytext=(breakeven_lambda_ec2_ha_reserved + 20, lambda_cost(breakeven_lambda_ec2_ha_reserved + 100)),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 plt.annotate(f'Breakeven EC2 HA On-Demand: {breakeven_lambda_ec2_ha_on_demand} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',
              xy=(breakeven_lambda_ec2_ha_on_demand, lambda_cost(breakeven_lambda_ec2_ha_on_demand)),
-             xytext=(breakeven_lambda_ec2_ha_on_demand + 200, lambda_cost(breakeven_lambda_ec2_ha_on_demand) + 100),
+             xytext=(breakeven_lambda_ec2_ha_on_demand + 20, lambda_cost(breakeven_lambda_ec2_ha_on_demand) -30),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 # Plot configuration
