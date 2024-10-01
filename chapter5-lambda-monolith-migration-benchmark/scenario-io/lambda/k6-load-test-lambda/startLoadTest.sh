@@ -4,7 +4,7 @@
 execute_load_test() {
     local scenario_file="$1"
     local output_folder="$2"
-    local run_counter="$4"
+    local run_counter="$3"
     local vu=$(echo "$scenario_file" | grep -oP '\d+vu' | grep -oP '\d+')
     local json_output_file="${output_folder}/k6-report-${scenario_file}.json"
     local html_output_file="${output_folder}/k6-report-${scenario_file}.html"
