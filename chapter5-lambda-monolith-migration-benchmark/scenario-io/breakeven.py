@@ -97,7 +97,7 @@ def ec2_ha_cost_on_demand(rps):
     return EC2_HA_MONTHLY_COST_ON_DEMAND + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
 
 # Generate data
-rps_values = np.arange(0, 201, 25)  # From 0 to 200 RPS, incrementing by 25
+rps_values = np.arange(0, 4001, 200)  # From 0 to 4000 RPS, incrementing by 100
 lambda_costs = np.array([lambda_cost(rps) for rps in rps_values])
 ec2_basic_costs_with_cloudwatch_reserved = np.array([ec2_basic_cost_with_cloudwatch_reserved(rps) for rps in rps_values])
 ec2_basic_costs_with_cloudwatch_on_demand = np.array([ec2_basic_cost_with_cloudwatch_on_demand(rps) for rps in rps_values])
@@ -129,21 +129,27 @@ plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (On-De
 # Annotations for breakeven points
 plt.annotate(f'Breakeven EC2 HA Reserved: {breakeven_lambda_ec2_ha_reserved} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha_reserved):.2f}',
              xy=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved)),
-             xytext=(breakeven_lambda_ec2_ha_reserved + 20, lambda_cost(breakeven_lambda_ec2_ha_reserved + 100)),
+             xytext=(breakeven_lambda_ec2_ha_reserved + 500, lambda_cost(breakeven_lambda_ec2_ha_reserved - 200)),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 plt.annotate(f'Breakeven EC2 HA On-Demand: {breakeven_lambda_ec2_ha_on_demand} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',
              xy=(breakeven_lambda_ec2_ha_on_demand, lambda_cost(breakeven_lambda_ec2_ha_on_demand)),
-             xytext=(breakeven_lambda_ec2_ha_on_demand + 20, lambda_cost(breakeven_lambda_ec2_ha_on_demand) -30),
+             xytext=(breakeven_lambda_ec2_ha_on_demand + 500, lambda_cost(breakeven_lambda_ec2_ha_on_demand) + 300),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 # Plot configuration
 plt.title('AWS Lambda vs EC2 Costs', fontsize=16)
 plt.xlabel('Requests per Second (RPS)', fontsize=14)
 plt.ylabel('Monthly Cost (USD)', fontsize=14)
+plt.xticks(rps_values)
 plt.grid(True)
 plt.legend()
 plt.tight_layout()
 
 # Save the plot
 plt.savefig('cost_comparison_breakeven_lambda_vs_ec2.png')
+
+print(ec2_ha_cost_on_demand(4000))
+print(ec2_ha_cost_reserved(4000))
+
+print(ALB_FIXED_MONTHLY_COST + calculate_alb_cost(4000))
