@@ -16,7 +16,7 @@ execute_load_test() {
     k6 run "$scenario_file" --out json="$json_output_file"
 }
 
-# Find all scenario files matching the pattern and sort them by rps value in descending order
+# Find all scenario files matching the pattern and sort them by rps value in ascending order
 scenario_files=$(ls tesina-encode-*-*.js | sort -t '-' -k 5,5n)
 
 # Execute load tests in 3 loops
