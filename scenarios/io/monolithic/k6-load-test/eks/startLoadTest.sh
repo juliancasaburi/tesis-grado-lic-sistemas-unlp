@@ -16,7 +16,7 @@ execute_load_test() {
     k6 run "$scenario_file" --out json="$json_output_file"
 }
 
-# Find all scenario files matching the pattern and sort them by vu value in descending order
+# Find all scenario files matching the pattern and sort them by vu value in ascending order
 scenario_files=$(ls tesina-scenario-*-*.js | sort -t'-' -k7,7n)
 
 # Execute load tests in 3 loops
