@@ -21,6 +21,13 @@ Resources:
           sudo amazon-linux-extras install epel -y
           sudo yum install -y https://dl.k6.io/rpm/repo.rpm
           sudo yum install -y k6
+          # Download load testing scripts
+          wget https://tesina-migration-scenario-bursty.s3.amazonaws.com/k6-load-test-monolithic.zip -P /home/ec2-user/ && unzip /home/ec2-user/k6-load-test-monolithic.zip -d /home/ec2-user/k6-load-test-monolithic
+          wget https://tesina-migration-scenario-bursty.s3.amazonaws.com/k6-load-test-lambda.zip -P /home/ec2-user/ && unzip /home/ec2-user/k6-load-test-lambda.zip -d /home/ec2-user/k6-load-test-lambda
+          cd /home/ec2-user/k6-load-test-monolithic
+          sudo chmod +x startLoadTest.sh
+          cd /home/ec2-user/k6-load-test-lambda
+          sudo chmod +x startLoadTest.sh
 
   InstanceSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
