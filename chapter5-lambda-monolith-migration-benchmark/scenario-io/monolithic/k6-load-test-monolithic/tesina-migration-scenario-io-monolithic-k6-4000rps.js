@@ -4,17 +4,16 @@ export let options = {
   scenarios: {
     constant_request_rate: {
       executor: 'constant-arrival-rate',
-      rate: 200, // RPS
+      rate: 4000, // RPS
       timeUnit: '1s',
       duration: '5m',
-      preAllocatedVUs: 40,
-      maxVUs: 200,
+      preAllocatedVUs: 40
     },
   },
 };
 
 export default function () {
-  const url = 'https://m2vmxo2m9k.execute-api.us-east-1.amazonaws.com/Prod/tesina-migration-scenario-io-lambda';
+  const url = 'https://ohp2pfsgw0.execute-api.us-east-1.amazonaws.com/prod/migration-scenario-io-monolithic';
 
   http.get(url);
 }
