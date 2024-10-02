@@ -29,7 +29,7 @@ Resources:
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
-          curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+          curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo -E bash -
           sudo yum install -y nodejs
           sudo npm install -g pm2
           wget https://tesina-encode.s3.amazonaws.com/tesina-encode-monolithic.zip -P /home/ec2-user/
