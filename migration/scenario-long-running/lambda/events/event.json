@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "eventVersion": "2.1",
+      "eventSource": "aws:s3",
+      "awsRegion": "us-east-1",
+      "eventTime": "1970-01-01T00:00:00.000Z",
+      "eventName": "PutObject",
+      "userIdentity": {
+        "principalId": "AWS:EXAMPLE"
+      },
+      "requestParameters": {
+        "sourceIPAddress": "127.0.0.1"
+      },
+      "responseElements": {
+        "x-amz-request-id": "EXAMPLE123456789",
+        "x-amz-id-2": "EXAMPLE123/456789012345678901234567890"
+      },
+      "s3": {
+        "s3SchemaVersion": "1.0",
+        "configurationId": "testConfigRule",
+        "bucket": {
+          "name": "tesina-migration-ffmpeg-input",
+          "ownerIdentity": {
+            "principalId": "EXAMPLE"
+          },
+          "arn": "arn:aws:s3:::tesina-migration-ffmpeg-input"
+        },
+        "object": {
+          "key": "path/to/video.mp4",
+          "size": 123456,
+          "eTag": "EXAMPLEETAG",
+          "sequencer": "EXAMPLESEQUENCER"
+        }
+      }
+    }
+  ]
+}
