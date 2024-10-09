@@ -120,22 +120,22 @@ plt.plot(rps_values, ec2_ha_costs_reserved, label='EC2 High Availability (Reserv
 plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (On-Demand)', linestyle=':', color='purple')
 
 # Annotations for breakeven points
-plt.annotate(f'Breakeven EC2 Basic Reserved: {breakeven_lambda_ec2_basic_reserved} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_basic_reserved):.2f}',
+plt.annotate(f'Breakeven EC2 Basic Reserved: {breakeven_lambda_ec2_basic_reserved} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_basic_reserved):.2f}',
              xy=(breakeven_lambda_ec2_basic_reserved, lambda_cost(breakeven_lambda_ec2_basic_reserved)),
              xytext=(breakeven_lambda_ec2_basic_reserved + 10, lambda_cost(breakeven_lambda_ec2_basic_reserved) - 10),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
-plt.annotate(f'Breakeven EC2 Basic On-Demand: {breakeven_lambda_ec2_basic_on_demand} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_basic_on_demand):.2f}',
+plt.annotate(f'Breakeven EC2 Basic On-Demand: {breakeven_lambda_ec2_basic_on_demand} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_basic_on_demand):.2f}',
              xy=(breakeven_lambda_ec2_basic_on_demand, lambda_cost(breakeven_lambda_ec2_basic_on_demand)),
              xytext=(breakeven_lambda_ec2_basic_on_demand + 20, lambda_cost(breakeven_lambda_ec2_basic_on_demand) + 5),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
-plt.annotate(f'Breakeven EC2 HA Reserved: {breakeven_lambda_ec2_ha_reserved} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha_reserved):.2f}',
+plt.annotate(f'Breakeven EC2 HA Reserved: {breakeven_lambda_ec2_ha_reserved} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_reserved):.2f}',
              xy=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved)),
              xytext=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved) - 15),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
-plt.annotate(f'Breakeven EC2 HA On-Demand: {breakeven_lambda_ec2_ha_on_demand} RPS\nCost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',
+plt.annotate(f'Breakeven EC2 HA On-Demand: {breakeven_lambda_ec2_ha_on_demand} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',
              xy=(breakeven_lambda_ec2_ha_on_demand, lambda_cost(breakeven_lambda_ec2_ha_on_demand)),
              xytext=(breakeven_lambda_ec2_ha_on_demand + 5, lambda_cost(breakeven_lambda_ec2_ha_on_demand) -2),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
