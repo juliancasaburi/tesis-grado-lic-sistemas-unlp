@@ -188,7 +188,7 @@ Resources:
         SecurityGroupIds:
           - !Ref EC2SecurityGroup
         CreditSpecification:
-          CpuCredits: standard
+          CpuCredits: standard # Standard CPU credits (not unlimited https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html)
 
   # Create a Scaling Policy for scaling out
   ScaleOutRequestDurationPolicy:
