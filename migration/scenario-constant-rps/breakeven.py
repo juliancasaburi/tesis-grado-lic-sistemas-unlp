@@ -70,11 +70,11 @@ def lambda_cost(rps):
     return compute_cost + request_cost
 
 # Calculate single EC2 basic cost (Reserved)
-def ec2_basic_cost_with_cloudwatch_reserved(rps):
+def ec2_basic_cost_reserved(rps):
     return EC2_BASIC_MONTHLY_COST_RESERVED
 
 # Calculate single EC2 basic cost (On-Demand)
-def ec2_basic_cost_with_cloudwatch_on_demand(rps):
+def ec2_basic_cost_on_demand(rps):
     return EC2_BASIC_MONTHLY_COST_ON_DEMAND
 
 def ec2_ha_cost_reserved(rps):
@@ -86,8 +86,8 @@ def ec2_ha_cost_on_demand(rps):
 # Generate data
 rps_values = np.arange(0, 101, 25)  # From 0 to 100 RPS, incrementing by 25
 lambda_costs = np.array([lambda_cost(rps) for rps in rps_values])
-ec2_basic_costs_reserved = np.array([ec2_basic_cost_with_cloudwatch_reserved(rps) for rps in rps_values])
-ec2_basic_costs_on_demand = np.array([ec2_basic_cost_with_cloudwatch_on_demand(rps) for rps in rps_values])
+ec2_basic_costs_reserved = np.array([ec2_basic_cost_reserved(rps) for rps in rps_values])
+ec2_basic_costs_on_demand = np.array([ec2_basic_cost_on_demand(rps) for rps in rps_values])
 ec2_ha_costs_reserved = np.array([ec2_ha_cost_reserved(rps) for rps in rps_values])
 ec2_ha_costs_on_demand = np.array([ec2_ha_cost_on_demand(rps) for rps in rps_values])
 
@@ -96,8 +96,8 @@ def find_intersection(func1, func2):
     return int(fsolve(lambda x: func1(x) - func2(x), 250)[0])
 
 # Finding breakeven points
-breakeven_lambda_ec2_basic_reserved = find_intersection(lambda_cost, ec2_basic_cost_with_cloudwatch_reserved)
-breakeven_lambda_ec2_basic_on_demand = find_intersection(lambda_cost, ec2_basic_cost_with_cloudwatch_on_demand)
+breakeven_lambda_ec2_basic_reserved = find_intersection(lambda_cost, ec2_basic_cost_reserved)
+breakeven_lambda_ec2_basic_on_demand = find_intersection(lambda_cost, ec2_basic_cost_on_demand)
 breakeven_lambda_ec2_ha_reserved = find_intersection(lambda_cost, ec2_ha_cost_reserved)
 breakeven_lambda_ec2_ha_on_demand = find_intersection(lambda_cost, ec2_ha_cost_on_demand)
 

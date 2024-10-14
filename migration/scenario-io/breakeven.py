@@ -28,9 +28,6 @@ EC2_HA_MONTHLY_COST_ON_DEMAND = EC2_BASIC_MONTHLY_COST_ON_DEMAND * 2  # HA EC2 w
 
 ALB_FIXED_MONTHLY_COST = 16.43  # Monthly fixed cost for Application Load Balancer (ALB)
 
-# CloudWatch costs (N.Virginia us-east-1 region)
-CLOUDWATCH_LOGGING_COST_PER_RPS = 0  # Example cost per RPS for CloudWatch logging
-
 def calculate_alb_cost(rps):
     # Calculate LCUs
     processed_bytes_lcus = 1  # 1 GB per hour / 1 GB processed bytes per hour per LCU
@@ -76,25 +73,21 @@ def lambda_cost(rps):
 
     return compute_cost + request_cost
 
-# Calculate single EC2 basic cost with CloudWatch (Reserved)
-def ec2_basic_cost_with_cloudwatch_reserved(rps):
-    cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_BASIC_MONTHLY_COST_RESERVED + cloudwatch_cost
+# Calculate single EC2 basic cost (Reserved)
+def ec2_basic_cost_reserved(rps):
+    return EC2_BASIC_MONTHLY_COST_RESERVED
 
-# Calculate single EC2 basic cost with CloudWatch (On-Demand)
-def ec2_basic_cost_with_cloudwatch_on_demand(rps):
-    cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_BASIC_MONTHLY_COST_ON_DEMAND + cloudwatch_cost
+# Calculate single EC2 basic cost (On-Demand)
+def ec2_basic_cost_on_demand(rps):
+    return EC2_BASIC_MONTHLY_COST_ON_DEMAND
 
-# Calculate EC2 high availability cost with CloudWatch (Reserved)
+# Calculate EC2 high availability cost (Reserved)
 def ec2_ha_cost_reserved(rps):
-    cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_HA_MONTHLY_COST_RESERVED * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
+    return EC2_HA_MONTHLY_COST_RESERVED * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
 
-# Calculate EC2 high availability cost with CloudWatch (On-Demand)
+# Calculate EC2 high availability costh (On-Demand)
 def ec2_ha_cost_on_demand(rps):
-    cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_HA_MONTHLY_COST_ON_DEMAND * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
+    return EC2_HA_MONTHLY_COST_ON_DEMAND * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
 
 # Generate data
 rps_values = np.arange(0, 4001, 200)  # From 0 to 4000 RPS, incrementing by 100
