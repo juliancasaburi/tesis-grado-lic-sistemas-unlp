@@ -20,9 +20,9 @@ TIER_1_LIMIT = 6_000_000_000  # 6 billion GB-seconds
 TIER_2_LIMIT = 9_000_000_000  # 9 billion GB-seconds (additional to Tier 1)
 TIER_3_LIMIT = TIER_1_LIMIT + TIER_2_LIMIT  # 15 billion GB-seconds total
 
-# EC2 costs (N.Virginia us-east-1 region) for t3.micro
-EC2_BASIC_MONTHLY_COST_RESERVED = 4.16  # t3.micro instance cost for reserved EC2
-EC2_BASIC_MONTHLY_COST_ON_DEMAND = 7.64  # t3.micro instance cost for on-demand EC2
+# EC2 costs (N.Virginia us-east-1 region) for m5.large
+EC2_BASIC_MONTHLY_COST_RESERVED = 43.80  # m5.large instance cost for reserved EC2
+EC2_BASIC_MONTHLY_COST_ON_DEMAND = 70.08  # m5.large instance cost for on-demand EC2
 EC2_HA_MONTHLY_COST_RESERVED = EC2_BASIC_MONTHLY_COST_RESERVED * 2  # High Availability (HA) EC2 with reserved pricing
 EC2_HA_MONTHLY_COST_ON_DEMAND = EC2_BASIC_MONTHLY_COST_ON_DEMAND * 2  # HA EC2 with on-demand pricing
 
@@ -89,18 +89,16 @@ def ec2_basic_cost_with_cloudwatch_on_demand(rps):
 # Calculate EC2 high availability cost with CloudWatch (Reserved)
 def ec2_ha_cost_reserved(rps):
     cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_HA_MONTHLY_COST_RESERVED + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
+    return EC2_HA_MONTHLY_COST_RESERVED * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
 
 # Calculate EC2 high availability cost with CloudWatch (On-Demand)
 def ec2_ha_cost_on_demand(rps):
     cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return EC2_HA_MONTHLY_COST_ON_DEMAND + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
+    return EC2_HA_MONTHLY_COST_ON_DEMAND * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
 
 # Generate data
 rps_values = np.arange(0, 4001, 200)  # From 0 to 4000 RPS, incrementing by 100
 lambda_costs = np.array([lambda_cost(rps) for rps in rps_values])
-ec2_basic_costs_with_cloudwatch_reserved = np.array([ec2_basic_cost_with_cloudwatch_reserved(rps) for rps in rps_values])
-ec2_basic_costs_with_cloudwatch_on_demand = np.array([ec2_basic_cost_with_cloudwatch_on_demand(rps) for rps in rps_values])
 ec2_ha_costs_reserved = np.array([ec2_ha_cost_reserved(rps) for rps in rps_values])
 ec2_ha_costs_on_demand = np.array([ec2_ha_cost_on_demand(rps) for rps in rps_values])
 
@@ -109,8 +107,6 @@ def find_intersection(func1, func2):
     return int(fsolve(lambda x: func1(x) - func2(x), 250)[0])
 
 # Finding breakeven points
-breakeven_lambda_ec2_basic_reserved = find_intersection(lambda_cost, ec2_basic_cost_with_cloudwatch_reserved)
-breakeven_lambda_ec2_basic_on_demand = find_intersection(lambda_cost, ec2_basic_cost_with_cloudwatch_on_demand)
 breakeven_lambda_ec2_ha_reserved = find_intersection(lambda_cost, ec2_ha_cost_reserved)
 breakeven_lambda_ec2_ha_on_demand = find_intersection(lambda_cost, ec2_ha_cost_on_demand)
 
