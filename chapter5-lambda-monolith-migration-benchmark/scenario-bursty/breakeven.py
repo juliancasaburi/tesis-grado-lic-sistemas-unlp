@@ -26,9 +26,6 @@ EC2_BASIC_MONTHLY_COST_ON_DEMAND = 15.18  # t3.small instance cost for on-demand
 
 ALB_FIXED_MONTHLY_COST = 16.43  # Monthly fixed cost for Application Load Balancer (ALB)
 
-# CloudWatch costs (N.Virginia us-east-1 region)
-CLOUDWATCH_LOGGING_COST_PER_RPS = 0  # Example cost per RPS for CloudWatch logging
-
 # Calculate the number of instances required based on RPS
 def calculate_instance_count(rps):
     return max(2, (rps // 10) * 2)  # 2 instances per 10 RPS, minimum of 2 instances
@@ -91,10 +88,9 @@ def lambda_cost(rps):
 
     return compute_cost + request_cost
 
-# Calculate EC2 high availability cost with CloudWatch (On-Demand)
+# Calculate EC2 high availability cost (On-Demand)
 def ec2_ha_cost_on_demand(rps):
-    cloudwatch_cost = CLOUDWATCH_LOGGING_COST_PER_RPS * rps * SECONDS_IN_MONTH / 1_000_000
-    return ec2_ha_monthly_cost(rps, reserved=False) + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps) + cloudwatch_cost
+    return ec2_ha_monthly_cost(rps, reserved=False) + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
 
 # Generate data
 rps_values = np.arange(0, 81, 10)  # From 0 to 80 RPS, incrementing by 10
