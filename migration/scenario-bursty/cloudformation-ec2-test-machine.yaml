@@ -4,7 +4,7 @@ Resources:
     Type: 'AWS::EC2::Instance'
     Properties:
       InstanceType: 'm5.2xlarge'
-      ImageId: '!Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64}}"' # Amazon Linux 2023 AMI
+      ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64}}"
       KeyName: 'ec2'
       SecurityGroups:
         - !Ref InstanceSecurityGroup
