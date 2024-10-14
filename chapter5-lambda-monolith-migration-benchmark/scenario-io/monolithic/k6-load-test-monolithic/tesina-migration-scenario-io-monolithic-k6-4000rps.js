@@ -7,13 +7,13 @@ export let options = {
       rate: 4000, // RPS
       timeUnit: '1s',
       duration: '5m',
-      preAllocatedVUs: 40
+      preAllocatedVUs: 4000,
     },
   },
 };
 
 export default function () {
-  const url = 'https://ohp2pfsgw0.execute-api.us-east-1.amazonaws.com/prod/migration-scenario-io-monolithic';
+  const url = 'https://z29pjrq0rl.execute-api.us-east-1.amazonaws.com/prod/migration-scenario-io-monolithic';
 
   http.get(url);
 }

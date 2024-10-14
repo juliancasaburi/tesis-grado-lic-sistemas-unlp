@@ -7,7 +7,7 @@ export let options = {
       rate: 4000, // RPS
       timeUnit: '1s',
       duration: '5m',
-      preAllocatedVUs: 40,
+      preAllocatedVUs: 4000,
     },
   },
 };
