@@ -1,0 +1,12 @@
+{
+    "name": "tesina-migration-scenario-diurnal-nocturnal",
+    "version": "1.0.0",
+    "description": "A Lambda function to test the I/O bound scenario.",
+    "main": "src/handlers/app.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Julian Casaburi",
+    "license": "ISC"
+  }
+  
