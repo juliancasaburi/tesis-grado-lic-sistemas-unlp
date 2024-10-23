@@ -2,8 +2,9 @@
 
 faas-cli rm -f tesina-scenario-network.yml
 
-# Remove secret
-# faas-cli secret remove dynamodb
+# Remove secrets
+faas-cli secret remove dynamodb-access-key-id
+faas-cli secret remove dynamodb-secret-access-key
 
 # Delete all resources OpenFaaS namespaces
 kubectl delete all --all -n openfaas
