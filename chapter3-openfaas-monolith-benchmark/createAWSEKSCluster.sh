@@ -1,10 +1,20 @@
 #!/bin/bash
 
+# Create the EKS cluster
 eksctl create cluster --name=tesina-casaburi --nodes=1 --auto-kubeconfig --region=sa-east-1
 
 # Check if the cluster was created successfully
 if [ $? -ne 0 ]; then
   echo "Failed to create the Kubernetes cluster"
+  exit 1
+fi
+
+# Update kubectl context to the new cluster
+aws eks update-kubeconfig --name tesina-casaburi --region sa-east-1
+
+# Check if the kubeconfig was updated successfully
+if [ $? -ne 0 ]; then
+  echo "Failed to update kubectl context for the new cluster"
   exit 1
 fi
 
