@@ -62,3 +62,10 @@ Helm is a package manager for Kubernetes.
 
 ## How to create the cluster
 Ensure Docker is running and run the provided [Bash script](./createLocalCluster.sh) to create the cluster, namespaces, and install the monitoring stack.
+
+# Deleting the cluster
+# EKS Cluster
+Run the provided [Bash script](./deleteAWSEKSCluster.sh).
+
+# Local Kubernetes Cluster Setup with kind
+Run the provided [Bash script](./deleteLocalCluster.sh).
