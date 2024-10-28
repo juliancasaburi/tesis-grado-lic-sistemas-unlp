@@ -6,3 +6,9 @@
 
 # git repo
 openfaas-node20-template/
+
+# script to copy k6 html dashboards
+copy_k6_html_dashboards.sh
+
+# k6 html dashboards
+k6-html-dashboards/
