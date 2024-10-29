@@ -11,7 +11,6 @@ export const handler = async (event) => {
   const srcKey = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
   
   const destBucket = process.env.OUTPUT_BUCKET;
-  const destKey = `reencoded/${srcKey}`;
   const tempFilePath = path.join('/tmp', path.basename(srcKey));
 
   try {
@@ -24,12 +23,12 @@ export const handler = async (event) => {
     // Upload the re-encoded file to the destination S3 bucket
     await client.send(new PutObjectCommand({
       Bucket: destBucket,
-      Key: destKey,
+      Key: srcKey,
       Body: outputBuffer,
       ContentType: 'video/mp4'
     }));
 
-    console.log(`Successfully re-encoded and uploaded: ${destKey}`);
+    console.log(`Successfully re-encoded and uploaded: ${srcKey}`);
     return { statusCode: 200, body: 'Success' };
     
   } catch (err) {

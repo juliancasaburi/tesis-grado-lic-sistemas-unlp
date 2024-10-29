@@ -1,8 +1,8 @@
 version = 0.1
 [default.deploy.parameters]
-stack_name = "tesina-migration-ffmpeg-stack"
+stack_name = "tesina-migration-long-running-simple-stack"
 resolve_s3 = true
-s3_prefix = "tesina-migration-ffmpeg-stack"
+s3_prefix = "tesina-migration-long-running-simple-stack"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_NAMED_IAM"

@@ -1,0 +1,91 @@
+{
+  "StartAt": "SplitVideo",
+  "States": {
+    "SplitVideo": {
+      "Type": "Task",
+      "Resource": "${SplitVideoFunctionArn}",
+      "Parameters": {
+        "bucket.$": "$.bucket",
+        "key.$": "$.key",
+        "destBucket": "${IntermediateBucket}"
+      },
+      "ResultPath": "$.output",
+      "Next": "ProcessEachPart",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "ProcessEachPart": {
+      "Type": "Map",
+      "ItemsPath": "$.output.segments",
+      "Iterator": {
+        "StartAt": "ProcessSegment",
+        "States": {
+          "ProcessSegment": {
+            "Type": "Task",
+            "Resource": "${ProcessVideoPartFunctionArn}",
+            "Parameters": {
+              "segment.$": "$",
+              "destBucket": "${IntermediateBucket}"
+            },
+            "End": true,
+            "Retry": [
+              {
+                "ErrorEquals": ["States.ALL"],
+                "IntervalSeconds": 5,
+                "MaxAttempts": 3,
+                "BackoffRate": 2.0
+              }
+            ]
+          }
+        }
+      },
+      "Next": "MergeVideoParts"
+    },
+    "MergeVideoParts": {
+      "Type": "Task",
+      "Resource": "${MergeVideoPartsFunctionArn}",
+      "Parameters": {
+        "processedKeys.$": "$",
+        "bucket": "${IntermediateBucket}",
+        "destBucket": "${OutputBucket}"
+      },
+      "Next": "CompleteProcessing",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleError"
+        }
+      ]
+    },
+    "CompleteProcessing": {
+      "Type": "Succeed"
+    },
+    "HandleError": {
+      "Type": "Fail",
+      "Error": "WorkflowError",
+      "Cause": "Error encountered during video processing"
+    }
+  }
+}

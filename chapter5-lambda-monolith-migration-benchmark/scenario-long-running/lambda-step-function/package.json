@@ -1,0 +1,8 @@
+{
+  "name": "tesina-migration-long-running-workflow",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Orchestrated video processing workflow using AWS SAM and Step Functions",
+  "author": "Julián Casaburi",
+  "license": "ISC"
+}
