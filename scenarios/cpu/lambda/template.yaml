@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >
+  SAM Template for scenario-1-cpu-bound Lambda function
+
+Resources:
+  TesinaScenarioCPUFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/handlers/app.handler
+      Runtime: nodejs20.x
+      CodeUri: .
+      MemorySize: 1536
+      Timeout: 10
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        TesinaScenarioCPUApi:
+          Type: Api
+          Properties:
+            Path: /tesina-scenario-cpu-bound-lambda
+            Method: get
+
+Outputs:
+  TesinaScenarioBurstyApi:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/tesina-scenario-cpu-bound-lambda/"
