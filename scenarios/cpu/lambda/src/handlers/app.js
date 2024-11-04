@@ -24,16 +24,14 @@ function generatePrimes(n) {
     return primes;
 }
 
-export async function handler(event, context) {
-    const primes = generatePrimes(10000);
+exports.handler = async (event) => {
+    const primes = generatePrimes(2000000);
 
-    const result = {
-        'body': JSON.stringify(primes),
-        'headers': {
+    return {
+        statusCode: 200,
+        body: JSON.stringify(primes),
+        headers: {
             'Content-Type': 'application/json'
-        },
-        'statusCode': 200
+        }
     };
-
-    return result;
-}
+};
