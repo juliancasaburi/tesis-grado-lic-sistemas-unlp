@@ -164,7 +164,7 @@ Resources:
         - !Ref SplitVideoFunctionRole
         - !Ref ProcessVideoPartFunctionRole
         - !Ref MergeVideoPartsFunctionRole
-  
+
   StepFunctionInvokePolicy:
     Type: AWS::IAM::Policy
     Properties:
@@ -197,6 +197,9 @@ Resources:
           Properties:
             Bucket: !Ref InputBucket
             Events: s3:ObjectCreated:*
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: TriggerStepFunction
 
   SplitVideoFunction:
     Type: AWS::Serverless::Function
@@ -214,6 +217,9 @@ Resources:
       Environment:
         Variables:
           INTERMEDIATE_BUCKET: !Ref IntermediateBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: SplitVideoFunction
 
   ProcessVideoPartFunction:
     Type: AWS::Serverless::Function
@@ -231,6 +237,9 @@ Resources:
       Environment:
         Variables:
           INTERMEDIATE_BUCKET: !Ref IntermediateBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: ProcessVideoPartFunction
 
   MergeVideoPartsFunction:
     Type: AWS::Serverless::Function
@@ -249,6 +258,9 @@ Resources:
         Variables:
           INTERMEDIATE_BUCKET: !Ref IntermediateBucket
           OUTPUT_BUCKET: !Ref OutputBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: MergeVideoPartsFunction
 
   VideoProcessingStepFunction:
     Type: AWS::Serverless::StateMachine
@@ -262,6 +274,9 @@ Resources:
         MergeVideoPartsFunctionArn: !GetAtt MergeVideoPartsFunction.Arn
         IntermediateBucket: !Ref IntermediateBucket
         OutputBucket: !Ref OutputBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Component: VideoProcessingStepFunction
 
 Outputs:
   InputBucketName:
