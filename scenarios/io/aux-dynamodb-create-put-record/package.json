@@ -1,0 +1,15 @@
+{
+    "name": "dynamodb-put-item",
+    "version": "1.0.0",
+    "description": "A script to insert an initial record into DynamoDB using AWS SDK v3",
+    "main": "putRecord.js",
+    "scripts": {
+        "start": "node putRecord.js"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.350.0",
+        "@aws-sdk/util-dynamodb": "^3.350.0"
+    },
+    "author": "",
+    "license": "ISC"
+}
