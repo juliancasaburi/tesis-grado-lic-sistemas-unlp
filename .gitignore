@@ -12,3 +12,6 @@ copy_k6_html_dashboards.sh
 
 # k6 html dashboards
 k6-html-dashboards/
+
+# node_modules in subfolders
+**/node_modules/
