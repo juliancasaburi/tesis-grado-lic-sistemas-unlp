@@ -11,7 +11,7 @@ Parameters:
 
   InstanceType:
     Type: String
-    Default: c5.4xlarge
+    Default: c6a.4xlarge
     Description: EC2 instance type.
 
   SqsQueueName:
