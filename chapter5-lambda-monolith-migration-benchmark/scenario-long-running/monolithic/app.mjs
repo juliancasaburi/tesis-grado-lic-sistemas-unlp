@@ -66,6 +66,9 @@ const setInstanceProtection = async (instanceId, protect) => {
 
 // Function to process video
 const processVideo = async (bucket, key) => {
+    const startTime = Date.now();  // Log start time
+    console.log(`Started processing video: ${key} at ${new Date(startTime).toISOString()}`);
+
     const decodedKey = decodeURIComponent(key.replace(/\+/g, " "));
     const tempFilePath = path.join(TEMP_DIR, path.basename(decodedKey));
     const outputFilePath = path.join(TEMP_DIR, `${path.basename(decodedKey, path.extname(decodedKey))}_processed.mp4`);
@@ -111,8 +114,14 @@ const processVideo = async (bucket, key) => {
         await setInstanceProtection(instanceId, false);
         // Mark processing as finished
         isProcessing = false;
+
+        const endTime = Date.now();  // Log end time
+        const timeTaken = (endTime - startTime) / 1000;  // Calculate time taken in seconds
+        console.log(`Finished processing video: ${key} at ${new Date(endTime).toISOString()}`);
+        console.log(`Total time taken for processing and uploading: ${timeTaken.toFixed(2)} seconds`);
     }
 };
+
 
 // Utility function to save a stream to a file
 const streamToFile = (stream, filePath) => new Promise((resolve, reject) => {
