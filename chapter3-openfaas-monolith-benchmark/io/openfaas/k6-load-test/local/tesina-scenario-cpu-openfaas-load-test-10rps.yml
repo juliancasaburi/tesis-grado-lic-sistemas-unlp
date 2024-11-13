@@ -1,0 +1,12 @@
+config:
+  target: 'http://127.0.0.1:8081'
+  phases:
+    - duration: 600
+      arrivalRate: 10
+      maxVusers: 10
+      name: "Phase 1 - 10 RPS for 10 minutes"
+
+scenarios:
+  - flow:
+      - get:
+          url: "/function/tesina-scenario-cpu"

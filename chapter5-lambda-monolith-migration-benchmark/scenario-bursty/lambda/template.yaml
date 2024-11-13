@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: >
+  SAM Template for tesina-scenario-bursty Lambda function
+
+Resources:
+  TesinaMigrationScenarioBurstyFunction:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: src/handlers/app.handler
+      Runtime: nodejs20.x
+      CodeUri: .
+      MemorySize: 1536
+      Timeout: 10
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        TesinaMigrationScenarioIOApi:
+          Type: Api
+          Properties:
+            Path: /tesina-migration-scenario-bursty-lambda
+            Method: get
+
+Outputs:
+  TesinaMigrationScenarioBurstyApi:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/tesina-migration-scenario-bursty-lambda/"

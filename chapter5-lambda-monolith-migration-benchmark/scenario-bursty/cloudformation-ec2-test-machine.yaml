@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: 'm5.2xlarge'
+      ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64}}"
+      KeyName: 'ec2'
+      SecurityGroups:
+        - !Ref InstanceSecurityGroup
+      BlockDeviceMappings:
+        - DeviceName: '/dev/xvda'
+          Ebs:
+            VolumeSize: 30  # Size of the EBS volume in GB
+            VolumeType: gp3  # General Purpose SSD
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          sudo yum update -y
+          # Install k6
+          sudo amazon-linux-extras install epel -y
+          sudo yum install -y https://dl.k6.io/rpm/repo.rpm
+          sudo yum install -y k6
+          # Download load testing scripts
+          wget https://tesina-migration-scenario-bursty.s3.amazonaws.com/k6-load-test-monolithic.zip -P /home/ec2-user/ && unzip /home/ec2-user/k6-load-test-monolithic.zip -d /home/ec2-user/k6-load-test-monolithic
+          wget https://tesina-migration-scenario-bursty.s3.amazonaws.com/k6-load-test-lambda.zip -P /home/ec2-user/ && unzip /home/ec2-user/k6-load-test-lambda.zip -d /home/ec2-user/k6-load-test-lambda
+          cd /home/ec2-user/k6-load-test-monolithic
+          sudo chmod +x startLoadTest.sh
+          cd /home/ec2-user/k6-load-test-lambda
+          sudo chmod +x startLoadTest.sh
+
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: 'Enable SSH access'
+      SecurityGroupIngress:
+        - IpProtocol: 'tcp'
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: '0.0.0.0/0'
+

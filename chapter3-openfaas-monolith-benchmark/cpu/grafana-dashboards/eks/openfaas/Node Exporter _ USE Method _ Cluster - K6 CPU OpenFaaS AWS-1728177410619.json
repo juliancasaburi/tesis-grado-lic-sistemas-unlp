@@ -1,0 +1,4004 @@
+{
+  "__inputs": [],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "9.5.15"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "snapshotData": [],
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "links": [],
+      "panels": [],
+      "title": "CPU",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "labels": {
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "Value",
+              "type": "number",
+              "values": [
+                0.010437355787037195,
+                0.00871093805555545,
+                0.008861111111110986,
+                0.0102735822685186,
+                0.0507934031481484,
+                0.08911414995370381,
+                0.12783304490740743,
+                0.16612181842592577,
+                0.18217592592592613,
+                0.18150925925925954,
+                0.18162500000000004,
+                0.18181944444444453,
+                0.18209259259259258,
+                0.1819907407407405,
+                0.1816064814814815,
+                0.28591203703703694,
+                0.3925925925925927,
+                0.4982453703703704,
+                0.6062824074074076,
+                0.6612445046906886,
+                0.6632222222222223,
+                0.6629398148148148,
+                0.6635324074074075,
+                0.6639958044907409,
+                0.6623939526388887,
+                0.6750107120634673,
+                0.6891485822685185,
+                0.7025535633532344,
+                0.720236111111111,
+                0.7316759259259258,
+                0.7316203703703701,
+                0.7305416666666666,
+                0.7299999999999999,
+                0.7317407407407408,
+                0.7304460790305076,
+                0.6070416666666667,
+                0.4831805555555557,
+                0.35921759259259267,
+                0.2356018518518519,
+                0.17228703703703718,
+                0.17304166666666676,
+                0.17306481481481484,
+                0.17311111111111122,
+                0.17321759259259284,
+                0.17321296296296274,
+                0.17318561930555587,
+                0.27327821189814816,
+                0.38081524893518504,
+                0.4892102473861404,
+                0.5965543485326035,
+                0.6605842015740743,
+                0.6585101274999998,
+                0.6594869793518514,
+                0.6586902489351851,
+                0.6574495081944447,
+                0.6617731481481485,
+                0.6745370370370368,
+                0.6939027777777778,
+                0.709569444444444,
+                0.7248564814814817,
+                0.7357361111111114,
+                0.7344537037037033,
+                0.733569444444444,
+                0.7355416666666668,
+                0.7339074074074076,
+                0.7368657407407404,
+                0.6233981481481485,
+                0.4971944444444448,
+                0.37338655614691996,
+                0.24754629629629643,
+                0.17377314814814815,
+                0.17374074074074075,
+                0.17374537037036997,
+                0.17366203703703742,
+                0.17368518518518505,
+                0.17363888888888857,
+                0.17362500000000003,
+                0.264943352481269,
+                0.3730092592592589,
+                0.4787083333333333,
+                0.5872546296296298,
+                0.6625509259259263,
+                0.662384259259259,
+                0.6668055555555554,
+                0.669291666666667,
+                0.6687694678089016,
+                0.6652500000000006,
+                0.6706250000000002,
+                0.6854953703703704,
+                0.6981111111111109,
+                0.714450530931825,
+                0.7325879629629628,
+                0.7334907407407406,
+                0.7326712962962963,
+                0.73386869775521,
+                0.7347638888888885,
+                0.7340601851851857,
+                0.6058703703703704,
+                0.44535648148148177,
+                0.2840972222222222
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: ((\n  instance:node_cpu_utilisation:rate5m{job=\"node-exporter\", cluster=\"\"}\n  *\n  instance:node_num_cpu:sum{job=\"node-exporter\", cluster=\"\"}\n) != 0 )\n/ scalar(sum(instance:node_num_cpu:sum{job=\"node-exporter\", cluster=\"\"}))\n\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Utilisation",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 3,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "labels": {
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "Value",
+              "type": "number",
+              "values": [
+                0.1075,
+                0.03875,
+                0.03125,
+                0.08125,
+                0.12375,
+                0.205,
+                0.25375,
+                0.20875,
+                0.155,
+                0.1675,
+                0.14,
+                0.13,
+                0.19375,
+                0.14625,
+                0.18,
+                0.5875,
+                0.82125,
+                0.92625,
+                0.8925,
+                0.785,
+                0.8575,
+                1.01375,
+                0.935,
+                0.89,
+                0.87875,
+                0.88,
+                1.04,
+                1.0675,
+                1.0275,
+                1.04875,
+                1.1625,
+                1.065,
+                1.03,
+                1,
+                0.92625,
+                0.4275,
+                0.24125,
+                0.205,
+                0.1525,
+                0.13875,
+                0.1425,
+                0.23875,
+                0.1825,
+                0.195,
+                0.18125,
+                0.15375,
+                0.5325,
+                0.7175,
+                0.9075,
+                1.08375,
+                1.0575,
+                0.86375,
+                0.86125,
+                0.70125,
+                0.685,
+                0.90875,
+                0.93875,
+                0.985,
+                0.935,
+                0.99625,
+                0.91125,
+                0.815,
+                1.06875,
+                0.9575,
+                0.91,
+                0.9725,
+                0.4625,
+                0.23125,
+                0.22,
+                0.17375,
+                0.13,
+                0.13125,
+                0.13125,
+                0.1325,
+                0.15375,
+                0.17625,
+                0.18125,
+                0.43875,
+                0.5825,
+                0.7775,
+                0.8025,
+                0.79125,
+                0.995,
+                0.91125,
+                0.79375,
+                0.83625,
+                0.82625,
+                0.98375,
+                1.0675,
+                0.98,
+                1.07,
+                1.09375,
+                0.99875,
+                1.04375,
+                0.99375,
+                0.9275,
+                0.91375,
+                0.40625,
+                0.175,
+                0.14375
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: (\n  instance:node_load1_per_cpu:ratio{job=\"node-exporter\", cluster=\"\"}\n  / scalar(count(instance:node_load1_per_cpu:ratio{job=\"node-exporter\", cluster=\"\"}))\n)  != 0\n\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Saturation (Load1 per CPU)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 12,
+      "links": [],
+      "panels": [],
+      "title": "Memory",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "labels": {
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "Value",
+              "type": "number",
+              "values": [
+                0.057898155417975716,
+                0.057845664449818646,
+                0.05740782802130906,
+                0.058467034004637264,
+                0.059982108607888884,
+                0.06288739106425867,
+                0.06566916536025913,
+                0.06394289180277579,
+                0.0664659165028022,
+                0.06414606272658341,
+                0.0649853006762936,
+                0.06485228238757579,
+                0.06507286796199552,
+                0.06576908346199795,
+                0.06454178287240708,
+                0.07340880422980867,
+                0.07237331181327145,
+                0.07974699600364643,
+                0.07455236628666906,
+                0.07684121951463518,
+                0.07285734029375923,
+                0.07213444703111704,
+                0.07285696976927813,
+                0.07693039240642185,
+                0.07713356333022958,
+                0.07388431064723089,
+                0.07503194847338357,
+                0.07705414758311202,
+                0.07038470692316345,
+                0.07440699718191435,
+                0.07499390795998973,
+                0.0752067125203063,
+                0.07716555194376529,
+                0.073469076212069,
+                0.06981002345296461,
+                0.06646295230695332,
+                0.06645665339077456,
+                0.0665004987877057,
+                0.06797950900812944,
+                0.06837201794178349,
+                0.06462132212768501,
+                0.06522218932788215,
+                0.06590185473439514,
+                0.06530703943405591,
+                0.06648938305327246,
+                0.06557851037054796,
+                0.0751889273452131,
+                0.07144601254521787,
+                0.06969454332301916,
+                0.07226487164846718,
+                0.07598456691431288,
+                0.06968812089867993,
+                0.07196091806579796,
+                0.07679478044633625,
+                0.07164967750166706,
+                0.07266652018598851,
+                0.07305384177690699,
+                0.07264540029056532,
+                0.07551770606811647,
+                0.07618687328099794,
+                0.07260587767924709,
+                0.07692495804736565,
+                0.07580906181842795,
+                0.07331283838920166,
+                0.07902793149397569,
+                0.07846461077453082,
+                0.06628571809682327,
+                0.06771223734909004,
+                0.06684755671834375,
+                0.06763282160197248,
+                0.06664006300892311,
+                0.06661437331156628,
+                0.06599609146075691,
+                0.06858544004290179,
+                0.06723920109487513,
+                0.067124462013892,
+                0.06692277318800866,
+                0.07369546667002613,
+                0.07794847017234696,
+                0.07533232031940196,
+                0.07272889180697506,
+                0.07397508914510242,
+                0.07818819951162403,
+                0.07625591434264445,
+                0.0739937388773182,
+                0.07284844770621257,
+                0.07451617839568092,
+                0.0711961555367906,
+                0.07985407757868679,
+                0.07621330402731707,
+                0.07430819065361882,
+                0.07267010192263923,
+                0.07526241470063288,
+                0.07463178203378662,
+                0.07536863171855057,
+                0.07561046069655386,
+                0.07855575979688345,
+                0.06138997812793989,
+                0.060499854816157494,
+                0.05346433596887401
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: (\n  instance:node_memory_utilisation:ratio{job=\"node-exporter\", cluster=\"\"}\n  / scalar(count(instance:node_memory_utilisation:ratio{job=\"node-exporter\", cluster=\"\"}))\n) != 0\n\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Utilisation",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "rds"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 5,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "rds"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "rds"
+              },
+              "labels": {
+                "__name__": "instance:node_vmstat_pgmajfault:rate5m",
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "instance:node_vmstat_pgmajfault:rate5m",
+              "type": "number",
+              "values": [
+                0,
+                0,
+                0.011111111111111112,
+                0.011111111111111112,
+                0.011111111111111112,
+                0.011111111111111112,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.003703703703703704,
+                0.0037037448564243313,
+                0.003703703703703704,
+                0.0740735253812935,
+                0.07037037037037037,
+                0.07037037037037037,
+                0.07037037037037037,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0.003703703703703704,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.011111111111111112
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: instance:node_vmstat_pgmajfault:rate5m{job=\"node-exporter\", cluster=\"\"}\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Memory Saturation (Major Page Faults)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 13,
+      "links": [],
+      "panels": [],
+      "title": "Network",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Receive/"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/Transmit/"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "B",
+                  "mode": "normal"
+                }
+              },
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 6,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "Bps"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100 Receive",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "Bps"
+              },
+              "labels": {
+                "__name__": "instance:node_network_receive_bytes_excluding_lo:rate5m",
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "instance:node_network_receive_bytes_excluding_lo:rate5m",
+              "type": "number",
+              "values": [
+                235944.63643662434,
+                35695.62850807408,
+                35960.022222222215,
+                330411.9468682223,
+                8120086.504953519,
+                16756804.516789725,
+                24885116.776219286,
+                32980127.490398385,
+                37379619.13217123,
+                39714095.16795106,
+                40250006.92882878,
+                40616344.10740741,
+                40637428.97407408,
+                40642129.325925924,
+                40504027.75185186,
+                57560654.15555556,
+                74897344.11111112,
+                91977986.83703704,
+                109408281.52962963,
+                118344151.12795043,
+                118453766.70000002,
+                118314453.46296299,
+                118423742.35185188,
+                118515025.63703705,
+                118390844.31481484,
+                119851460.65326653,
+                121174946.44444445,
+                121413472.34464934,
+                123251283.45185184,
+                124631328.78518519,
+                124638162.9888889,
+                125797255.64074075,
+                125829813.54444444,
+                125985284.60370372,
+                125654190.16877969,
+                106469282.7851852,
+                87047537.46296297,
+                67825655.45185184,
+                48584437.25555555,
+                38741667.85925927,
+                38930284.55925925,
+                38962314.80740742,
+                38962909.12222222,
+                38954766.78518519,
+                38946234.49629629,
+                38937961.71111111,
+                55053185.811111115,
+                72522001.41851851,
+                90323180.47577247,
+                107900774.1683395,
+                118597763.13333334,
+                118483910.64814815,
+                118461362.95925926,
+                118127768.40370372,
+                117843625.69259259,
+                118303251.51111113,
+                119429231.73703702,
+                121512520.34444445,
+                123081278.32592593,
+                124533368.06296298,
+                125760316.91481483,
+                125501772.95925927,
+                125335036.68148148,
+                125735786.44074076,
+                125494166.21851853,
+                125818251.56666668,
+                108460401.40740739,
+                88885443.40370372,
+                69514851.15019798,
+                50145141.9962963,
+                38680720.9,
+                38682986.62222223,
+                38691454.003703706,
+                38691287.540740736,
+                38717477.4,
+                38765104.377777785,
+                38781581.49259259,
+                53457116.56907515,
+                70862586.51851851,
+                88057801.05185188,
+                105532946.40740739,
+                117489551.75555557,
+                117680788.90370369,
+                118182156.61851855,
+                118597047.80370371,
+                118520621.79950148,
+                117850118.9740741,
+                117408910.18888889,
+                118857033.16666669,
+                120076967.74444449,
+                121898102.078912,
+                124947806.24814816,
+                125236356.07407409,
+                125040096.22222224,
+                125334147.84280175,
+                125785265.61851853,
+                125676661.60740744,
+                104644572.32257709,
+                78109043.83312151,
+                54370599.99796143
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: instance:node_network_receive_bytes_excluding_lo:rate5m{job=\"node-exporter\", cluster=\"\"} != 0\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        },
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "Bps"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "B",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  },
+                  "transform": "negative-Y"
+                },
+                "displayNameFromDS": "192.168.68.85:9100 Transmit",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "Bps"
+              },
+              "labels": {
+                "__name__": "instance:node_network_transmit_bytes_excluding_lo:rate5m",
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "instance:node_network_transmit_bytes_excluding_lo:rate5m",
+              "type": "number",
+              "values": [
+                39457.222986931214,
+                38115.650489555555,
+                38247.62592592592,
+                344733.1717942223,
+                8693861.34886852,
+                16886431.444877617,
+                25107460.593194943,
+                33298739.863244176,
+                38996574.2126207,
+                40731136.17931741,
+                40753444.908285104,
+                40744543.35555556,
+                40765622.3,
+                40770425.77777778,
+                40631903.61111112,
+                57742256.21481482,
+                75133283.36296298,
+                92267127.48888889,
+                109751894.91111109,
+                118723513.88688274,
+                118824949.10000001,
+                118684581.56296295,
+                118794840.39259262,
+                118886408.95925926,
+                118761955.76666667,
+                120226196.69848187,
+                121556173.14074075,
+                121796046.63298795,
+                123640044.9,
+                125024425.57037039,
+                125031118.37777779,
+                126193677.42962964,
+                126234358.83333337,
+                126382096.26296295,
+                126049803.93485855,
+                106804524.80740742,
+                87321688.42222221,
+                68039378.77037036,
+                48737679.10740741,
+                38864084.54444445,
+                39053371.25925926,
+                39085473.13703704,
+                39086239.162962966,
+                39077884.81481481,
+                39069300.52592593,
+                39060993.044444464,
+                55226822.76666665,
+                72750480.72222222,
+                90607096.6841109,
+                108239693.7800461,
+                118969974.27777778,
+                118855627.48888889,
+                118833169.16296294,
+                118498420.91111113,
+                118213413.61111112,
+                118674433.91111113,
+                119804638.94444443,
+                121895270.77777779,
+                123469198.2296296,
+                124926412.59629631,
+                126157519.0074074,
+                125895899.56296295,
+                125730574.15555553,
+                126132444.61851852,
+                125889989.26296298,
+                126214538.61851852,
+                108802572.97037038,
+                89166028,
+                69734289.3180295,
+                50303431.188888885,
+                38802902.3925926,
+                38805213.03333333,
+                38813733.38518518,
+                38813545.844444446,
+                38839825.370370366,
+                38889403.68148149,
+                38904186.67037038,
+                53625825.74638061,
+                71085692.71111108,
+                88334638.64444442,
+                105864366.8777778,
+                117858095.22592592,
+                118049850.97037038,
+                118552588.17407407,
+                118968649.6814815,
+                118891991.74435273,
+                118219357.17777778,
+                117777487.02592592,
+                119230807.71851851,
+                120457449.90370369,
+                122282386.14132753,
+                125341797.18888889,
+                125630880.0962963,
+                125434030.95555557,
+                125728878.7569027,
+                126181266.32592592,
+                126072329.81111112,
+                103828693.62874277,
+                76067277.90354812,
+                50725486.24922449
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: instance:node_network_transmit_bytes_excluding_lo:rate5m{job=\"node-exporter\", cluster=\"\"} != 0\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "B"
+        }
+      ],
+      "title": "Network Utilisation (Bytes Receive/Transmit)",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "Bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/ Receive/"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "A",
+                  "mode": "normal"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/ Transmit/"
+            },
+            "properties": [
+              {
+                "id": "custom.stacking",
+                "value": {
+                  "group": "B",
+                  "mode": "normal"
+                }
+              },
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 7,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [],
+          "meta": {
+            "executedQueryString": "Expr: instance:node_network_receive_drop_excluding_lo:rate5m{job=\"node-exporter\", cluster=\"\"} != 0\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "typeVersion": [
+              0,
+              0
+            ]
+          },
+          "refId": "A"
+        },
+        {
+          "fields": [],
+          "meta": {
+            "executedQueryString": "Expr: instance:node_network_transmit_drop_excluding_lo:rate5m{job=\"node-exporter\", cluster=\"\"} != 0\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "typeVersion": [
+              0,
+              0
+            ]
+          },
+          "refId": "B"
+        }
+      ],
+      "title": "Network Saturation (Drops Receive/Transmit)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 14,
+      "links": [],
+      "panels": [],
+      "title": "Disk IO",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 25
+      },
+      "id": 8,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100 nvme0n1",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "labels": {
+                "container": "node-exporter",
+                "device": "nvme0n1",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "Value",
+              "type": "number",
+              "values": [
+                0.0060592592592592694,
+                0.0029333333333333394,
+                0.001037037037037015,
+                0.0010518518518518479,
+                0.0014666666666666697,
+                0.0021185185185185287,
+                0.002400000000000012,
+                0.002740740740740748,
+                0.0027703703703703614,
+                0.0020296296296296364,
+                0.0015111111111111158,
+                0.0010518518518518479,
+                0.0010370370370370414,
+                0.001037037037037015,
+                0.0010222222222222347,
+                0.0009925925925925688,
+                0.0010222222222222084,
+                0.0010222222222222084,
+                0.0010666666666666546,
+                0.0010518401647389062,
+                0.001007407407407428,
+                0.0008592592592592568,
+                0.0008740740740740897,
+                0.0008444444444444502,
+                0.0008740740740740897,
+                0.0009185287243932514,
+                0.0008888888888888963,
+                0.03585158628454605,
+                0.0357925925925926,
+                0.03576296296296296,
+                0.03585185185185185,
+                0.0010666666666666546,
+                0.0009629629629629556,
+                0.000962962962962982,
+                0.0010074186009474387,
+                0.0009777777777777886,
+                0.000948148148148149,
+                0.000948148148148149,
+                0.0009037037037037029,
+                0.0009037037037037029,
+                0.0009185185185185095,
+                0.0010222222222222347,
+                0.0010518518518518479,
+                0.0011259259259259336,
+                0.001096296296296294,
+                0.0010666666666666546,
+                0.0010370370370370414,
+                0.0010814814814814875,
+                0.0010518401647389062,
+                0.0010370293553380867,
+                0.0010074074074074017,
+                0.0009925925925925953,
+                0.0010370370370370414,
+                0.0010518518518518479,
+                0.0010666666666666546,
+                0.001096296296296294,
+                0.0010370370370370414,
+                0.0009777777777777886,
+                0.0009925925925925688,
+                0.0009777777777777886,
+                0.0009037037037037029,
+                0.0009629629629629556,
+                0.001096296296296294,
+                0.0010518518518518479,
+                0.0010666666666666546,
+                0.0011111111111111007,
+                0.0010518518518518479,
+                0.0009629629629629556,
+                0.0008888987655418469,
+                0.0008740740740740634,
+                0.0008740740740740634,
+                0.0008148148148148106,
+                0.0008592592592592568,
+                0.0009185185185185095,
+                0.0009037037037037029,
+                0.00088888888888887,
+                0.0009185185185185095,
+                0.0009925815639085516,
+                0.0010074074074074017,
+                0.0010074074074074017,
+                0.0010074074074074017,
+                0.0009185185185185358,
+                0.0009333333333333424,
+                0.0009333333333333161,
+                0.0009333333333333424,
+                0.0009333437038189405,
+                0.000962962962962982,
+                0.000948148148148149,
+                0.0009333333333333424,
+                0.0009037037037037029,
+                0.0009185287243932251,
+                0.000962962962962982,
+                0.000948148148148149,
+                0.0009037037037037029,
+                0.0009481376132857791,
+                0.0009037037037037029,
+                0.0008888888888888963,
+                0.00143703703703703,
+                0.0016444444444444542,
+                0.0026666666666666627
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: (\n  instance_device:node_disk_io_time_seconds:rate5m{job=\"node-exporter\", cluster=\"\"}\n  / scalar(count(instance_device:node_disk_io_time_seconds:rate5m{job=\"node-exporter\", cluster=\"\"}))\n) != 0\n\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Disk IO Utilisation",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 25
+      },
+      "id": 9,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100 nvme0n1",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "labels": {
+                "container": "node-exporter",
+                "device": "nvme0n1",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "Value",
+              "type": "number",
+              "values": [
+                0.03138888888888887,
+                0.01442592592592586,
+                0.0014037037037037746,
+                0.0013370370370371053,
+                0.001885185185185239,
+                0.004122222222222221,
+                0.005770370370370343,
+                0.006544444444444429,
+                0.006603703703703656,
+                0.004885185185185248,
+                0.0026888888888888856,
+                0.0011629629629630422,
+                0.0010814814814814875,
+                0.0010814814814814875,
+                0.0010444444444443787,
+                0.0010888888888889302,
+                0.0010925925925926517,
+                0.0010555555555555429,
+                0.0011481481481480514,
+                0.0012407269548857158,
+                0.001292592592592554,
+                0.0011703703703703798,
+                0.0011592592592593208,
+                0.0011296296296296549,
+                0.001107407407407432,
+                0.0010889009877887946,
+                0.0010925925925925463,
+                0.01841838208605857,
+                0.018474074074074073,
+                0.018488888888888957,
+                0.018511111111111075,
+                0.003166666666666629,
+                0.0011259259259259336,
+                0.001133333333333271,
+                0.0010777897532194686,
+                0.0010296296296295985,
+                0.0009814814814815363,
+                0.0009703703703703721,
+                0.0008851851851850959,
+                0.000925925925925926,
+                0.0009740740740740934,
+                0.0010074074074073755,
+                0.0009666666666666507,
+                0.0010518518518518216,
+                0.000925925925925926,
+                0.001000000000000038,
+                0.0009555555555555918,
+                0.0012703703703704362,
+                0.001266652592748912,
+                0.0013370271331324156,
+                0.001218518518518442,
+                0.0012111111111111044,
+                0.0009851851851851523,
+                0.000981481481481431,
+                0.0009703703703703721,
+                0.00103333333333332,
+                0.001133333333333271,
+                0.0011629629629629368,
+                0.0011962962962963242,
+                0.001251851851851829,
+                0.0010370370370370414,
+                0.0011037037037036053,
+                0.001670370370370346,
+                0.0017333333333332938,
+                0.001744444444444458,
+                0.0017777777777778453,
+                0.0015518518518518932,
+                0.0011481481481481566,
+                0.0010407523046551538,
+                0.001066666666666707,
+                0.001066666666666707,
+                0.001077777777777766,
+                0.0010148148148148182,
+                0.001077777777777766,
+                0.0009592592592593132,
+                0.0009407407407407062,
+                0.000948148148148149,
+                0.00105184016473888,
+                0.0011074074074073265,
+                0.0011629629629630422,
+                0.0010962962962962678,
+                0.0012037037037036617,
+                0.0011703703703703798,
+                0.0012666666666667147,
+                0.0012333333333333274,
+                0.0011444571606351091,
+                0.0010851851851852088,
+                0.0012370370370370489,
+                0.0011481481481481566,
+                0.0012111111111111044,
+                0.0012481620166150645,
+                0.001325925925925941,
+                0.0012703703703703308,
+                0.0013222222222222196,
+                0.0013259111935793456,
+                0.0012481481481481079,
+                0.0011851851851852652,
+                0.0038592592592592654,
+                0.004999999999999979,
+                0.008866666666666688
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: (\n  instance_device:node_disk_io_time_weighted_seconds:rate5m{job=\"node-exporter\", cluster=\"\"}\n  / scalar(count(instance_device:node_disk_io_time_weighted_seconds:rate5m{job=\"node-exporter\", cluster=\"\"}))\n) != 0\n\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Disk IO Saturation",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
+      "id": 15,
+      "links": [],
+      "panels": [],
+      "title": "Disk Space",
+      "type": "row"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 10,
+      "links": [],
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "snapshotData": [
+        {
+          "fields": [
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "showPoints": "never",
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "interval": 60000,
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "name": "Time",
+              "type": "time",
+              "values": [
+                1718139600000,
+                1718139660000,
+                1718139720000,
+                1718139780000,
+                1718139840000,
+                1718139900000,
+                1718139960000,
+                1718140020000,
+                1718140080000,
+                1718140140000,
+                1718140200000,
+                1718140260000,
+                1718140320000,
+                1718140380000,
+                1718140440000,
+                1718140500000,
+                1718140560000,
+                1718140620000,
+                1718140680000,
+                1718140740000,
+                1718140800000,
+                1718140860000,
+                1718140920000,
+                1718140980000,
+                1718141040000,
+                1718141100000,
+                1718141160000,
+                1718141220000,
+                1718141280000,
+                1718141340000,
+                1718141400000,
+                1718141460000,
+                1718141520000,
+                1718141580000,
+                1718141640000,
+                1718141700000,
+                1718141760000,
+                1718141820000,
+                1718141880000,
+                1718141940000,
+                1718142000000,
+                1718142060000,
+                1718142120000,
+                1718142180000,
+                1718142240000,
+                1718142300000,
+                1718142360000,
+                1718142420000,
+                1718142480000,
+                1718142540000,
+                1718142600000,
+                1718142660000,
+                1718142720000,
+                1718142780000,
+                1718142840000,
+                1718142900000,
+                1718142960000,
+                1718143020000,
+                1718143080000,
+                1718143140000,
+                1718143200000,
+                1718143260000,
+                1718143320000,
+                1718143380000,
+                1718143440000,
+                1718143500000,
+                1718143560000,
+                1718143620000,
+                1718143680000,
+                1718143740000,
+                1718143800000,
+                1718143860000,
+                1718143920000,
+                1718143980000,
+                1718144040000,
+                1718144100000,
+                1718144160000,
+                1718144220000,
+                1718144280000,
+                1718144340000,
+                1718144400000,
+                1718144460000,
+                1718144520000,
+                1718144580000,
+                1718144640000,
+                1718144700000,
+                1718144760000,
+                1718144820000,
+                1718144880000,
+                1718144940000,
+                1718145000000,
+                1718145060000,
+                1718145120000,
+                1718145180000,
+                1718145240000,
+                1718145300000,
+                1718145360000,
+                1718145420000,
+                1718145480000,
+                1718145540000
+              ]
+            },
+            {
+              "config": {
+                "color": {
+                  "mode": "palette-classic"
+                },
+                "custom": {
+                  "axisBorderShow": false,
+                  "axisCenteredZero": false,
+                  "axisColorMode": "text",
+                  "axisLabel": "",
+                  "axisPlacement": "auto",
+                  "barAlignment": 0,
+                  "drawStyle": "line",
+                  "fillOpacity": 100,
+                  "gradientMode": "none",
+                  "hideFrom": {
+                    "legend": false,
+                    "tooltip": false,
+                    "viz": false
+                  },
+                  "insertNulls": false,
+                  "lineInterpolation": "linear",
+                  "lineWidth": 1,
+                  "pointSize": 5,
+                  "scaleDistribution": {
+                    "type": "linear"
+                  },
+                  "showPoints": "never",
+                  "spanNulls": false,
+                  "stacking": {
+                    "group": "A",
+                    "mode": "normal"
+                  },
+                  "thresholdsStyle": {
+                    "mode": "off"
+                  }
+                },
+                "displayNameFromDS": "192.168.68.85:9100",
+                "mappings": [],
+                "thresholds": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green"
+                    },
+                    {
+                      "color": "red",
+                      "value": 80
+                    }
+                  ]
+                },
+                "unit": "percentunit"
+              },
+              "labels": {
+                "container": "node-exporter",
+                "endpoint": "http-metrics",
+                "instance": "192.168.68.85:9100",
+                "job": "node-exporter",
+                "namespace": "monitoring",
+                "pod": "kube-prometheus-stack-prometheus-node-exporter-l772r",
+                "service": "kube-prometheus-stack-prometheus-node-exporter"
+              },
+              "name": "Value",
+              "type": "number",
+              "values": [
+                0.05582063969436997,
+                0.05581968096533787,
+                0.05582263704652017,
+                0.05582327619920823,
+                0.055842051309420125,
+                0.05585407536936434,
+                0.05586601953522254,
+                0.05587025392178097,
+                0.055878722694897826,
+                0.055890067655110974,
+                0.055892863948121256,
+                0.05590576684301156,
+                0.05590472821989345,
+                0.05592546073521255,
+                0.055927777663706775,
+                0.05610650073410681,
+                0.05611652744190082,
+                0.05613698032791888,
+                0.0561648234168927,
+                0.05617528954215975,
+                0.05624667490800795,
+                0.05624667490800795,
+                0.05626009711445731,
+                0.05625985743219928,
+                0.056311229329502464,
+                0.05636280096202067,
+                0.05636220175637561,
+                0.056365157837557904,
+                0.05636995148271839,
+                0.05641085725475452,
+                0.056410937148840525,
+                0.056451842920876655,
+                0.05644796805770526,
+                0.05645767518915524,
+                0.05654012588591556,
+                0.05662193742998781,
+                0.05662321573536394,
+                0.05662321573536394,
+                0.05662389483509501,
+                0.056627569963051384,
+                0.056647423643424386,
+                0.05664746359046739,
+                0.05664746359046739,
+                0.05664450750928509,
+                0.0569924862008932,
+                0.05693420346515032,
+                0.056978185159497756,
+                0.057003311849547295,
+                0.057003311849547295,
+                0.057003311849547295,
+                0.05695745264417867,
+                0.056962565865683185,
+                0.05697279230869221,
+                0.057045495926959545,
+                0.05706443082534346,
+                0.0570846839761465,
+                0.05708472392318951,
+                0.05716653546726176,
+                0.05720128939467527,
+                0.05722154254547831,
+                0.05730335408955056,
+                0.05730335408955056,
+                0.05746505971963088,
+                0.05748667106989606,
+                0.05744752296775211,
+                0.05744987984328935,
+                0.05744991979033235,
+                0.057449400478773296,
+                0.057449400478773296,
+                0.057449400478773296,
+                0.057449400478773296,
+                0.0574494404258163,
+                0.0574494404258163,
+                0.05745027931371939,
+                0.057441490964258504,
+                0.05738648388604195,
+                0.05738864102636417,
+                0.057470093047049385,
+                0.05748567239382096,
+                0.05751371521800979,
+                0.05751395490026781,
+                0.05755486067230394,
+                0.057749163089475544,
+                0.05764933542900847,
+                0.057681492798626714,
+                0.05771133323975073,
+                0.05771133323975073,
+                0.05773238533141385,
+                0.057732105702112825,
+                0.05773322421931694,
+                0.057643303425514866,
+                0.05764546056583708,
+                0.0576505737873416,
+                0.0577021853669028,
+                0.0577021853669028,
+                0.05770178589647276,
+                0.05772251841179186,
+                0.057392076472062514,
+                0.057391637054589474,
+                0.056547915559301346
+              ]
+            }
+          ],
+          "meta": {
+            "custom": {
+              "resultType": "matrix"
+            },
+            "executedQueryString": "Expr: sum without (device) (\n  max without (fstype, mountpoint) ((\n    node_filesystem_size_bytes{job=\"node-exporter\", fstype!=\"\", mountpoint!=\"\", cluster=\"\"}\n    -\n    node_filesystem_avail_bytes{job=\"node-exporter\", fstype!=\"\", mountpoint!=\"\", cluster=\"\"}\n  ) != 0)\n)\n/ scalar(sum(max without (fstype, mountpoint) (node_filesystem_size_bytes{job=\"node-exporter\", fstype!=\"\", mountpoint!=\"\", cluster=\"\"})))\n\nStep: 1m0s",
+            "preferredVisualisationType": "graph",
+            "type": "timeseries-multi",
+            "typeVersion": [
+              0,
+              1
+            ]
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Disk Space Utilisation",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "snapshot": {
+    "originalUrl": "/d/adohqaz9q6by8f",
+    "timestamp": "2024-06-12T00:51:14.268Z"
+  },
+  "style": "dark",
+  "tags": [
+    "node-exporter-mixin"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "default",
+          "value": "default"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data Source",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": ".*",
+        "current": {},
+        "datasource": {
+          "type": "prometheus",
+          "uid": "$datasource"
+        },
+        "definition": "",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2024-06-11T21:00:00.000Z",
+    "raw": {
+      "from": "2024-06-11T21:00:00.000Z",
+      "to": "2024-06-11T22:39:00.000Z"
+    },
+    "to": "2024-06-11T22:39:00.000Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "America/Argentina/Buenos_Aires",
+  "title": "Node Exporter / USE Method / Cluster - K6 CPU OpenFaaS AWS",
+  "uid": "adohqaz9q6by8f",
+  "version": 1,
+  "weekStart": ""
+}

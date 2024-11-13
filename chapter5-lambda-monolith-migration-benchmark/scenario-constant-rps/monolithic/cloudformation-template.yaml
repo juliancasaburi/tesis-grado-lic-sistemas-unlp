@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template for EC2 instance and API Gateway setup
+
+Resources:
+  EC2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for EC2 instance running Node.js
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22              # SSH port
+          ToPort: 22                # SSH port
+          CidrIp: 0.0.0.0/0         # Open to the world
+        - IpProtocol: tcp
+          FromPort: 3000            # Application port
+          ToPort: 3000              # Application port
+          CidrIp: 0.0.0.0/0         # Open to the world
+
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.small
+      CreditSpecification:
+        CPUCredits: standard        # Standard CPU credits (not unlimited https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html)
+      ImageId: !Sub "{{resolve:ssm:/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64}}"
+      KeyName: ec2
+      SecurityGroupIds:
+        - !Ref EC2SecurityGroup     # Reference to the newly created security group
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo -E bash -
+          sudo yum install -y nodejs
+          sudo npm install -g pm2
+          wget https://tesina-encode.s3.amazonaws.com/tesina-encode-monolithic.zip -P /home/ec2-user/
+          unzip /home/ec2-user/tesina-encode-monolithic.zip -d /home/ec2-user/tesina-encode-monolithic
+          cd /home/ec2-user/tesina-encode-monolithic
+          pm2 start ecosystem.config.js
+
+  ApiGatewayRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: tesina-encode-monolithic
+
+  ApiGatewayResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      RestApiId: !Ref ApiGatewayRestApi
+      ParentId: !GetAtt ApiGatewayRestApi.RootResourceId
+      PathPart: encode
+
+  ApiGatewayMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGatewayRestApi
+      ResourceId: !Ref ApiGatewayResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: HTTP
+        Uri: !Sub
+          - 'http://${EC2Instance.PublicDnsName}:3000/encode'
+          - EC2Instance: !GetAtt EC2Instance.PublicDnsName
+        RequestTemplates:
+          'application/json': |
+            #set($inputRoot = $input.path('$'))
+            {
+              "text": "$inputRoot.text"
+            }
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseTemplates:
+              application/json: |
+                #set($inputRoot = $input.path('$.body'))
+                $inputRoot
+            ResponseParameters:
+              method.response.header.Content-Type: "'application/json'"
+          - StatusCode: 500
+            SelectionPattern: '5\d{2}'
+            ResponseTemplates:
+              application/json: |
+                {
+                  "message": "Internal server error"
+                }
+            ResponseParameters:
+              method.response.header.Content-Type: "'application/json'"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseModels:
+            application/json: 'Empty'
+          ResponseParameters:
+            method.response.header.Content-Type: false
+        - StatusCode: 500
+          ResponseModels:
+            application/json: 'Empty'
+          ResponseParameters:
+            method.response.header.Content-Type: false
+
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn: ApiGatewayMethod
+    Properties:
+      RestApiId: !Ref ApiGatewayRestApi
+      StageName: prod
+
+Outputs:
+  ApiGatewayEndpoint:
+    Description: Endpoint URL of the API Gateway
+    Value: !Sub 'https://${ApiGatewayRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/encode'

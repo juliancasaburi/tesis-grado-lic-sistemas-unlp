@@ -1,0 +1,12 @@
+config:
+  target: 'http://127.0.0.1:3000'
+  phases:
+    - duration: 600
+      arrivalRate: 100
+      maxVusers: 100
+      name: "Phase 1 - 100 RPS for 10 minutes"
+
+scenarios:
+  - flow:
+      - get:
+          url: "/tesina-scenario-network"
