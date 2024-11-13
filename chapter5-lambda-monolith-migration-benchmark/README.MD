@@ -1,3 +1,4 @@
+# Chapter 5
 # Deploying CloudFormation Stacks
 This guide provides instructions for deploying CloudFormation stacks for both Lambda-based and monolithic architectures, as well as an EC2 instance used for load testing with K6.
 

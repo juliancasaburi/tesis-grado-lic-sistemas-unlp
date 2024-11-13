@@ -1,3 +1,4 @@
+# Chapter 3
 # Creating the cluster
 # EKS Cluster Setup
 Sets up an Amazon EKS cluster using eksctl and configures namespaces and monitoring with the kube-prometheus-stack Helm chart.
