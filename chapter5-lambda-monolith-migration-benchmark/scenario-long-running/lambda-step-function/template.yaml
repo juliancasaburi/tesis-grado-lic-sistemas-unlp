@@ -1,0 +1,290 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for Orchestrated Video Processing Workflow
+
+Resources:
+  FfmpegLambdaLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: tesina-ffmpeg-lambda-layer
+      Description: FFMPEG Lambda Layer
+      ContentUri: s3://tesina-casaburi-ffmpeg/ffmpeg.zip
+      CompatibleRuntimes:
+        - nodejs20.x
+
+  InputBucket:
+    Type: AWS::S3::Bucket
+
+  OutputBucket:
+    Type: AWS::S3::Bucket
+
+  IntermediateBucket:
+    Type: AWS::S3::Bucket
+
+  TriggerStepFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: TriggerStepFunctionRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  SplitVideoFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: SplitVideoFunctionRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  ProcessVideoPartFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: ProcessVideoPartFunctionRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  MergeVideoPartsFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: MergeVideoPartsFunctionRole
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+  StepFunctionExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: states.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: StepFunctionInvokeLambdaPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - lambda:InvokeFunction
+                Resource:
+                  - !GetAtt SplitVideoFunction.Arn
+                  - !GetAtt ProcessVideoPartFunction.Arn
+                  - !GetAtt MergeVideoPartsFunction.Arn
+
+  CloudWatchLogsPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: CloudWatchLogsPolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: "arn:aws:logs:*:*:*"
+      Roles:
+        - !Ref TriggerStepFunctionRole
+        - !Ref StepFunctionExecutionRole
+        - !Ref SplitVideoFunctionRole
+        - !Ref ProcessVideoPartFunctionRole
+        - !Ref MergeVideoPartsFunctionRole
+
+  ReadS3BucketPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: ReadS3BucketPolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+            Resource:
+              - !Sub "${InputBucket.Arn}/*"
+      Roles:
+        - !Ref TriggerStepFunctionRole
+        - !Ref SplitVideoFunctionRole
+
+  ReadS3BucketStepPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: ReadS3BucketPolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:GetObject
+            Resource:
+              - !Sub "${InputBucket.Arn}/*"
+              - !Sub "${IntermediateBucket.Arn}/*"
+      Roles:
+        - !Ref StepFunctionExecutionRole
+        - !Ref ProcessVideoPartFunctionRole
+        - !Ref MergeVideoPartsFunctionRole
+
+  WriteS3BucketPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: WriteS3BucketPolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:PutObject
+            Resource:
+              - !Sub "${IntermediateBucket.Arn}/*"
+              - !Sub "${OutputBucket.Arn}/*"
+      Roles:
+        - !Ref StepFunctionExecutionRole
+        - !Ref SplitVideoFunctionRole
+        - !Ref ProcessVideoPartFunctionRole
+        - !Ref MergeVideoPartsFunctionRole
+
+  StepFunctionInvokePolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: StepFunctionInvokePolicy
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - states:StartExecution
+            Resource: !Ref VideoProcessingStepFunction
+      Roles:
+        - !Ref TriggerStepFunctionRole
+
+  TriggerStepFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs20.x
+      CodeUri: ./src/TriggerStepFunction
+      MemorySize: 128
+      Timeout: 60
+      Role: !GetAtt TriggerStepFunctionRole.Arn
+      Environment:
+        Variables:
+          STEP_FUNCTION_ARN: !Ref VideoProcessingStepFunction
+      Events:
+        FileUpload:
+          Type: S3
+          Properties:
+            Bucket: !Ref InputBucket
+            Events: s3:ObjectCreated:*
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: TriggerStepFunction
+
+  SplitVideoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs20.x
+      CodeUri: ./src/SplitVideoFunction
+      MemorySize: 3008
+      Timeout: 900
+      Role: !GetAtt SplitVideoFunctionRole.Arn
+      EphemeralStorage:
+        Size: 10240
+      Layers:
+        - !Ref FfmpegLambdaLayer
+      Environment:
+        Variables:
+          INTERMEDIATE_BUCKET: !Ref IntermediateBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: SplitVideoFunction
+
+  ProcessVideoPartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs20.x
+      CodeUri: ./src/ProcessVideoPartFunction
+      MemorySize: 3008
+      EphemeralStorage:
+        Size: 10240
+      Timeout: 900
+      Role: !GetAtt ProcessVideoPartFunctionRole.Arn
+      Layers:
+        - !Ref FfmpegLambdaLayer
+      Environment:
+        Variables:
+          INTERMEDIATE_BUCKET: !Ref IntermediateBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: ProcessVideoPartFunction
+
+  MergeVideoPartsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs20.x
+      CodeUri: ./src/MergeVideoPartsFunction
+      MemorySize: 3008
+      Timeout: 900
+      Role: !GetAtt MergeVideoPartsFunctionRole.Arn
+      EphemeralStorage:
+        Size: 10240
+      Layers:
+        - !Ref FfmpegLambdaLayer
+      Environment:
+        Variables:
+          INTERMEDIATE_BUCKET: !Ref IntermediateBucket
+          OUTPUT_BUCKET: !Ref OutputBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Function: MergeVideoPartsFunction
+
+  VideoProcessingStepFunction:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      Name: TesinaMigrationLongRunningWorkflow
+      DefinitionUri: src/statemachine.asl.json
+      Role: !GetAtt StepFunctionExecutionRole.Arn
+      DefinitionSubstitutions:
+        SplitVideoFunctionArn: !GetAtt SplitVideoFunction.Arn
+        ProcessVideoPartFunctionArn: !GetAtt ProcessVideoPartFunction.Arn
+        MergeVideoPartsFunctionArn: !GetAtt MergeVideoPartsFunction.Arn
+        IntermediateBucket: !Ref IntermediateBucket
+        OutputBucket: !Ref OutputBucket
+      Tags:
+        Project: MigrationLongRunningWorkflow
+        Component: VideoProcessingStepFunction
+
+Outputs:
+  InputBucketName:
+    Description: "Input S3 Bucket"
+    Value: !Ref InputBucket
+  IntermediateBucketName:
+    Description: "Intermediate S3 Bucket"
+    Value: !Ref IntermediateBucket
+  OutputBucketName:
+    Description: "Output S3 Bucket"
+    Value: !Ref OutputBucket

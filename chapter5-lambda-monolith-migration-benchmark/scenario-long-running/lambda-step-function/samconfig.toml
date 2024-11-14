@@ -1,0 +1,9 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "tesina-migration-long-running-workflow"
+resolve_s3 = true
+s3_prefix = "tesina-migration-long-running-workflow"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_NAMED_IAM"
+image_repositories = []

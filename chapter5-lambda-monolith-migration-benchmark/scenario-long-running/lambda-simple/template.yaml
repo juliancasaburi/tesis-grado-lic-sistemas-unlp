@@ -19,10 +19,10 @@ Resources:
   OutputBucket:
     Type: AWS::S3::Bucket
 
-  TesinaMigrationFfmpegFunctionRole:
+  TesinaMigrationLongRunningProcessVideoFunctionRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: TesinaMigrationFfmpegFunctionRole
+      RoleName: TesinaMigrationLongRunningProcessVideoFunctionRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -45,7 +45,7 @@ Resources:
               - logs:PutLogEvents
             Resource: 'arn:aws:logs:*:*:*'
       Roles:
-        - !Ref TesinaMigrationFfmpegFunctionRole
+        - !Ref TesinaMigrationLongRunningProcessVideoFunctionRole
 
   ReadS3BucketPolicy:
     Type: AWS::IAM::Policy
@@ -60,7 +60,7 @@ Resources:
             Resource:
               - !Sub '${InputBucket.Arn}/*'
       Roles:
-        - !Ref TesinaMigrationFfmpegFunctionRole
+        - !Ref TesinaMigrationLongRunningProcessVideoFunctionRole
 
   WriteS3BucketPolicy:
     Type: AWS::IAM::Policy
@@ -75,9 +75,9 @@ Resources:
             Resource:
               - !Sub '${OutputBucket.Arn}/*'
       Roles:
-        - !Ref TesinaMigrationFfmpegFunctionRole
+        - !Ref TesinaMigrationLongRunningProcessVideoFunctionRole
 
-  TesinaMigrationFfmpegFunction:
+  TesinaMigrationLongRunningProcessVideoFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: src/handlers/app.handler
@@ -85,13 +85,15 @@ Resources:
       CodeUri: .
       MemorySize: 3008
       Timeout: 900
+      EphemeralStorage:
+        Size: 10240
       Events:
         FileUploadedToS3:
           Type: S3
           Properties:
             Bucket: !Ref InputBucket
             Events: s3:ObjectCreated:*
-      Role: !GetAtt TesinaMigrationFfmpegFunctionRole.Arn
+      Role: !GetAtt TesinaMigrationLongRunningProcessVideoFunctionRole.Arn
       Layers:
         - !Ref FfmpegLambdaLayer
       Environment:
@@ -101,7 +103,7 @@ Resources:
 Outputs:
   TesinaMigrationFfmpegFunctionArn:
     Description: "ARN of the Video Reencoder Lambda Function"
-    Value: !GetAtt TesinaMigrationFfmpegFunction.Arn
+    Value: !GetAtt TesinaMigrationLongRunningProcessVideoFunction.Arn
   InputBucketName:
     Description: "Input S3 Bucket"
     Value: !Ref InputBucket

@@ -1,0 +1,284 @@
+Parameters:
+  VpcCidr:
+    Type: String
+    Default: 10.0.0.0/16
+    Description: CIDR block for the VPC.
+
+  SubnetCidr:
+    Type: String
+    Default: 10.0.0.0/24
+    Description: CIDR block for the public subnet.
+
+  InstanceType:
+    Type: String
+    Default: c6a.4xlarge
+    Description: EC2 instance type.
+
+  SqsQueueName:
+    Type: String
+    Default: MigrationScenarioLongRunningQueue
+    Description: Name of the SQS Queue.
+    
+Resources:
+  # Network Resources
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCidr
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: VPC
+
+  Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref SubnetCidr
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: Subnet
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref VPC
+      InternetGatewayId: !Ref InternetGateway
+
+  RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: Route Table
+
+  Route:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  SubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref Subnet
+      RouteTableId: !Ref RouteTable
+
+  # Security Group
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP and SSH
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+  # SQS Queue
+  SQSQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Ref SqsQueueName
+      VisibilityTimeout: 480
+
+  # SQS Queue Policy to allow S3 to send messages to the queue
+  SQSQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: "SQS:SendMessage"
+            Resource: !GetAtt SQSQueue.Arn
+            Principal:
+              Service: "s3.amazonaws.com"
+      Queues:
+        - !Ref SQSQueue
+
+  # S3 Buckets
+  InputBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      NotificationConfiguration:
+        QueueConfigurations:
+          - Event: s3:ObjectCreated:*
+            Queue: !GetAtt SQSQueue.Arn
+
+  OutputBucket:
+    Type: AWS::S3::Bucket
+
+  # IAM Roles and Policies
+  EC2Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
+      Policies:
+        - PolicyName: S3Access
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource:
+                  - !Sub "${InputBucket.Arn}/*"
+                  - !Sub "${OutputBucket.Arn}/*"
+        - PolicyName: SQSAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sqs:ReceiveMessage
+                  - sqs:DeleteMessage
+                  - sqs:GetQueueAttributes
+                Resource: !GetAtt SQSQueue.Arn
+        - PolicyName: AutoScalingAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - autoscaling:SetInstanceProtection
+                Resource: "*"
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Path: "/"
+      Roles:
+        - !Ref EC2Role
+
+  # Launch Template
+  LaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    DependsOn: SQSQueue
+    Properties:
+      LaunchTemplateName: MyLaunchTemplate
+      LaunchTemplateData:
+        ImageId: ami-01474e18ca92c216d # Custom tesina-migration-scenario-long-running AMI
+        InstanceType: !Ref InstanceType
+        KeyName: ec2
+        SecurityGroupIds:
+          - !Ref SecurityGroup
+        IamInstanceProfile:
+          Name: !Ref EC2InstanceProfile
+        UserData:
+          Fn::Base64: !Sub |
+            #!/bin/bash
+            echo QUEUE_URL=${SQSQueue} >> /etc/environment
+            echo OUTPUT_BUCKET=${OutputBucket} >> /etc/environment
+            echo AUTO_SCALING_GROUP_NAME="LongRunningAutoScalingGroup" >> /etc/environment
+            echo AWS_REGION=${AWS::Region} >> /etc/environment
+            cd /home/ec2-user/tesina-migration-scenario-long-running-monolithic
+            pm2 start ecosystem.config.js
+
+  AutoScalingGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    DependsOn: LaunchTemplate
+    Properties:
+      AutoScalingGroupName: LongRunningAutoScalingGroup
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchTemplate
+        Version: !GetAtt LaunchTemplate.LatestVersionNumber
+      MinSize: 0        # Allow scaling to zero instances
+      MaxSize: 100
+      DesiredCapacity: 1
+      VPCZoneIdentifier:
+        - !Ref Subnet
+      Tags:
+        - Key: Name
+          Value: ASG Instance
+          PropagateAtLaunch: true
+
+  # Scaling Policies
+  TargetTrackingScalePolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AutoScalingGroupName: !Ref AutoScalingGroup
+      PolicyType: TargetTrackingScaling
+      TargetTrackingConfiguration:
+        CustomizedMetricSpecification:
+          MetricName: ApproximateNumberOfMessagesVisible
+          Namespace: AWS/SQS
+          Dimensions:
+            - Name: QueueName
+              Value: !GetAtt SQSQueue.QueueName
+          Statistic: Average
+        TargetValue: 1
+  
+  QueueEmptyAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: QueueEmptyAlarm
+      MetricName: ApproximateNumberOfMessagesVisible
+      Namespace: AWS/SQS
+      Statistic: Average
+      Dimensions:
+        - Name: QueueName
+          Value: !GetAtt SQSQueue.QueueName
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: LessThanThreshold
+      AlarmActions:
+        - Ref: ScaleDownPolicy
+  
+  ScaleDownPolicy:
+    Type: AWS::AutoScaling::ScalingPolicy
+    Properties:
+      AutoScalingGroupName: !Ref AutoScalingGroup
+      PolicyType: SimpleScaling
+      AdjustmentType: ChangeInCapacity
+      ScalingAdjustment: -1   # Decrease capacity by 1 instance
+      Cooldown: 300           # 5 minutes cooldown after scale down
+
+Outputs:
+  VPCId:
+    Description: VPC ID
+    Value: !Ref VPC
+
+  SubnetId:
+    Description: Subnet ID
+    Value: !Ref Subnet
+
+  AutoScalingGroupName:
+    Description: Name of the Auto Scaling Group
+    Value: !Ref AutoScalingGroup
+
+  SQSQueueURL:
+    Description: URL of the SQS Queue
+    Value: !Ref SQSQueue
+
+  OutputBucket:
+    Description: Output Bucket Name
+    Value: !Ref OutputBucket
+
+  InputBucket:
+    Description: Input Bucket Name
+    Value: !Ref InputBucket
