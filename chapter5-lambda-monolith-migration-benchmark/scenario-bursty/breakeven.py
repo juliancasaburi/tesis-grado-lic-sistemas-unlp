@@ -10,7 +10,7 @@ LCU_COST_PER_HOUR = 0.008  # Cost per LCU per hour in dollars
 # AWS Lambda costs (N.Virginia us-east-1 region)
 LAMBDA_REQUEST_COST_PER_MILLION = 0.20  # Cost per 1 million requests
 LAMBDA_MEMORY_MB = 1536
-LAMBDA_EXECUTION_TIME_MS = 214  # Execution time in milliseconds
+LAMBDA_EXECUTION_TIME_MS = 194  # Execution time in milliseconds
 
 # Lambda tiered pricing for GB-seconds
 LAMBDA_COMPUTE_COST_PER_GB_SECOND_TIER_1 = 0.0000166667  # First 6 billion GB-seconds
@@ -28,7 +28,7 @@ ALB_FIXED_MONTHLY_COST = 16.43  # Monthly fixed cost for Application Load Balanc
 
 # Calculate the number of instances required based on RPS
 def calculate_instance_count(rps):
-    return max(2, (rps // 10) * 2)  # 2 instances per 10 RPS, minimum of 2 instances
+    return max(2, ((rps - 0.01) // 10 + 1) * 2)
 
 # Monthly cost for High Availability (HA) with 2 instances per 10 RPS
 def ec2_ha_monthly_cost(rps, reserved=True):
@@ -93,7 +93,7 @@ def ec2_ha_cost_on_demand(rps):
     return ec2_ha_monthly_cost(rps, reserved=False) + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
 
 # Generate data
-rps_values = np.arange(0, 81, 10)  # From 0 to 80 RPS, incrementing by 10
+rps_values = np.arange(0, 21, 0.1)  # From 0 to 20 RPS, incrementing by 1
 lambda_costs = np.array([lambda_cost(rps) for rps in rps_values])
 ec2_ha_costs_on_demand = np.array([ec2_ha_cost_on_demand(rps) for rps in rps_values])
 
@@ -105,26 +105,27 @@ def find_intersection(func1, func2):
 breakeven_lambda_ec2_ha_on_demand = find_intersection(lambda_cost, ec2_ha_cost_on_demand)
 
 # Plotting
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(16, 8))
 
 # Lambda Costs
 plt.plot(rps_values, lambda_costs, label='AWS Lambda', linestyle='--', color='orange')
 
 # EC2 HA Costs (On-Demand)
-plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (On-Demand)', linestyle=':', color='purple')
+plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (HA) - On-Demand', linestyle=':', color='purple')
 
-plt.annotate(f'Breakeven EC2 HA On-Demand: {breakeven_lambda_ec2_ha_on_demand} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',
+plt.annotate(f'EC2 HA On-Demand Break-even: {breakeven_lambda_ec2_ha_on_demand} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',
              xy=(breakeven_lambda_ec2_ha_on_demand, lambda_cost(breakeven_lambda_ec2_ha_on_demand)),
-             xytext=(breakeven_lambda_ec2_ha_on_demand + 20, lambda_cost(breakeven_lambda_ec2_ha_on_demand) -30),
+             xytext=(breakeven_lambda_ec2_ha_on_demand, lambda_cost(breakeven_lambda_ec2_ha_on_demand) - 50),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 # Plot configuration
-plt.title('AWS Lambda vs EC2 Costs', fontsize=16)
+plt.title('AWS Lambda vs EC2 Costs (with horizontal scaling)', fontsize=16)
 plt.xlabel('Requests per Second (RPS)', fontsize=14)
 plt.ylabel('Monthly Cost (USD)', fontsize=14)
 plt.grid(True)
 plt.legend()
-plt.tight_layout()
+plt.xlim(0, 20)
+plt.xticks(np.arange(0, 21, 1))
 
 # Save the plot
 plt.savefig('cost_comparison_breakeven_lambda_vs_ec2.png')
