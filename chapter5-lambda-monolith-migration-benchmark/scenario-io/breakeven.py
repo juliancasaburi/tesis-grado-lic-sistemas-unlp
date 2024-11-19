@@ -28,18 +28,25 @@ EC2_HA_MONTHLY_COST_ON_DEMAND = EC2_BASIC_MONTHLY_COST_ON_DEMAND * 2  # HA EC2 w
 
 ALB_FIXED_MONTHLY_COST = 16.43  # Monthly fixed cost for Application Load Balancer (ALB)
 
-def calculate_alb_cost(rps):
-    # Calculate LCUs
-    processed_bytes_lcus = 1  # 1 GB per hour / 1 GB processed bytes per hour per LCU
-    new_connections_lcus = rps / 25  # rps new connections per second / 25 new connections per second per LCU
-    active_connections_lcus = (rps * 1) / 3000  # rps active connections / 3000 connections per LCU
-    paid_rules_lcus = max(-9, 0)  # Max (-9 paid rules per request, 0)
+def calculate_alb_cost(processed_bytes_gb_per_hour = 1, new_connections_per_second = 10, average_connection_duration_seconds = 1):
+    # Constants
+    LCU_COST_PER_HOUR = 0.008  # LCU price per hour
+    HOURS_PER_MONTH = 730  # Number of hours in a month
+
+    # Calculate LCUs based on the provided dimensions
+    processed_bytes_lcus = processed_bytes_gb_per_hour / 1  # 1 GB processed per hour per LCU
+    new_connections_lcus = new_connections_per_second / 25  # 25 new connections per second per LCU
+    active_connections = new_connections_per_second * average_connection_duration_seconds
+    active_connections_lcus = active_connections / 3000  # 3000 active connections per LCU
+
+    # Assuming there are no paid rules being used for this calculation
+    paid_rules_lcus = 0  # Change as per your actual usage
 
     # Determine the maximum LCUs
     max_lcus = max(processed_bytes_lcus, new_connections_lcus, active_connections_lcus, paid_rules_lcus)
 
     # Calculate monthly ALB cost
-    alb_monthly_cost = 1 * max_lcus * LCU_COST_PER_HOUR * HOURS_PER_MONTH
+    alb_monthly_cost = max_lcus * LCU_COST_PER_HOUR * HOURS_PER_MONTH
     return alb_monthly_cost
 
 # Calculate Lambda cost with tiered pricing
@@ -83,11 +90,11 @@ def ec2_basic_cost_on_demand(rps):
 
 # Calculate EC2 high availability cost (Reserved)
 def ec2_ha_cost_reserved(rps):
-    return EC2_HA_MONTHLY_COST_RESERVED * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
+    return EC2_HA_MONTHLY_COST_RESERVED * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(new_connections_per_second = rps)
 
 # Calculate EC2 high availability costh (On-Demand)
 def ec2_ha_cost_on_demand(rps):
-    return EC2_HA_MONTHLY_COST_ON_DEMAND * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
+    return EC2_HA_MONTHLY_COST_ON_DEMAND * 2 + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(new_connections_per_second = rps)
 
 # Generate data
 rps_values = np.arange(0, 4001, 200)  # From 0 to 4000 RPS, incrementing by 200
