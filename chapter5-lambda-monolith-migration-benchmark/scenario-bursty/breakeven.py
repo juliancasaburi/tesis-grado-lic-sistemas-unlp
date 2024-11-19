@@ -90,16 +90,17 @@ def lambda_cost(rps):
 
 # Calculate EC2 high availability cost (On-Demand)
 def ec2_ha_cost_on_demand(rps):
-    return ec2_ha_monthly_cost(rps, reserved=False) + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(rps)
+    return ec2_ha_monthly_cost(rps, reserved=False) + ALB_FIXED_MONTHLY_COST + calculate_alb_cost(new_connections_per_second = rps)
 
 # Generate data
 rps_values = np.arange(0, 21, 0.1)  # From 0 to 20 RPS, incrementing by 1
 lambda_costs = np.array([lambda_cost(rps) for rps in rps_values])
 ec2_ha_costs_on_demand = np.array([ec2_ha_cost_on_demand(rps) for rps in rps_values])
 
-# Define the intersection function
+# Find the intersection, rounded up to the next integer
 def find_intersection(func1, func2):
-    return int(fsolve(lambda x: func1(x) - func2(x), 250)[0])
+    breakeven_rps = fsolve(lambda x: func1(x) - func2(x), 250)[0]
+    return int(round(breakeven_rps, 1))  # Round to one decimal place
 
 # Finding breakeven points
 breakeven_lambda_ec2_ha_on_demand = find_intersection(lambda_cost, ec2_ha_cost_on_demand)
