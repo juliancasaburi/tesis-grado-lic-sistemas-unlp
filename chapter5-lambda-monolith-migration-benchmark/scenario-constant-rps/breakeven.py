@@ -119,6 +119,10 @@ plt.plot(rps_values, ec2_ha_costs_reserved, label='EC2 High Availability (HA) - 
 # EC2 HA Costs (On-Demand)
 plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (HA) - On-Demand', linestyle=':', color='purple')
 
+# Annotations font
+plt.rc('font', size=12)
+plt.legend(fontsize=12)
+
 # Annotations for breakeven points
 plt.annotate(f'EC2 Basic Reserved Break-even: {breakeven_lambda_ec2_basic_reserved} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_basic_reserved):.2f}',
              xy=(breakeven_lambda_ec2_basic_reserved, lambda_cost(breakeven_lambda_ec2_basic_reserved)),
@@ -132,7 +136,7 @@ plt.annotate(f'EC2 Basic On-Demand Break-even: {breakeven_lambda_ec2_basic_on_de
 
 plt.annotate(f'EC2 HA Reserved Break-even: {breakeven_lambda_ec2_ha_reserved} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_reserved):.2f}',
              xy=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved)),
-             xytext=(breakeven_lambda_ec2_ha_reserved + 5, lambda_cost(breakeven_lambda_ec2_ha_reserved) - 15),
+             xytext=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved) - 15),
              arrowprops=dict(facecolor='black', arrowstyle='->'))
 
 plt.annotate(f'EC2 HA On-Demand Break-even: {breakeven_lambda_ec2_ha_on_demand} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_on_demand):.2f}',

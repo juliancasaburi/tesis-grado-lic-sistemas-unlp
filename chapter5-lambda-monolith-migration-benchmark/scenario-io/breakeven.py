@@ -122,6 +122,10 @@ plt.plot(rps_values, ec2_ha_costs_reserved, label='EC2 High Availability (HA) - 
 # EC2 HA Costs (On-Demand)
 plt.plot(rps_values, ec2_ha_costs_on_demand, label='EC2 High Availability (HA) - On-Demand', linestyle=':', color='purple')
 
+# Annotations font
+plt.rc('font', size=12)
+plt.legend(fontsize=12)
+
 # Annotations for breakeven points
 plt.annotate(f'EC2 HA Reserved Break-even: {breakeven_lambda_ec2_ha_reserved} RPS\nLambda Cost: ${lambda_cost(breakeven_lambda_ec2_ha_reserved):.2f}',
              xy=(breakeven_lambda_ec2_ha_reserved, lambda_cost(breakeven_lambda_ec2_ha_reserved)),
@@ -138,6 +142,7 @@ plt.title('AWS Lambda vs EC2 Costs', fontsize=16)
 plt.xlabel('Requests per Second (RPS)', fontsize=14)
 plt.ylabel('Monthly Cost (USD)', fontsize=14)
 plt.xticks(rps_values)
+plt.tight_layout()
 plt.grid(True)
 plt.legend()
 plt.xlim(0, 4000)
