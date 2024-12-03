@@ -1,2 +1,2 @@
-# Include .txt files in the current folder
-!*.txt
+!DYNAMODB_ACCESS_KEY_ID.txt
+!DYNAMODB_SECRET_ACCESS_KEY.txt
