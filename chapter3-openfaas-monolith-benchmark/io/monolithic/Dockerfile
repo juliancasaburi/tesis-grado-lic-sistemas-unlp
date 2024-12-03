@@ -4,7 +4,7 @@ FROM node:20-alpine3.19
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json and package-lock.json to the working directory for dependency installation
 COPY package*.json ./
 
 # Install the app dependencies
@@ -13,8 +13,9 @@ RUN npm install
 # Install pm2 globally
 RUN npm install pm2 -g
 
-# Copy the rest of the application code to the working directory
-COPY . .
+# Copy the main application file and PM2 ecosystem config
+COPY server.js ./
+COPY ecosystem.config.js ./
 
 # Expose the port on which the app will run
 EXPOSE 3000
