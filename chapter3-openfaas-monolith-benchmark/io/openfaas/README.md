@@ -79,7 +79,9 @@ To confirm that the item was successfully added to your DynamoDB table:
 
 # Deploying the Application
 
-Execute the `deploy.sh` script:
+1. Update credentials `DYNAMODB_ACCESS_KEY_ID.txt` and `DYNAMODB_SECRET_ACCESS_KEY.txt`
+
+2. Execute the `deploy.sh` script:
 
 ```bash
 ./deploy.sh
