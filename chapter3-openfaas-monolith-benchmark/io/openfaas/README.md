@@ -1,7 +1,7 @@
 
-# DynamoDB Table Setup and Record Insertion for `TesinaNetworkScenarioLambda`
+# Setup and deployment
 
-This project requires a DynamoDB table named `TesinaNetworkScenarioLambda` to be created beforehand in on-demand mode and a sample record. Follow the instructions below to set up the table and add the record.
+This project requires a DynamoDB table named `TesinaNetworkScenarioOpenFaaS` to be created beforehand in on-demand mode and a sample record. Follow the instructions below to set up the table and add the record. Once the DynamoDB setup is complete, you can deploy the application to Kubernetes using the provided deployment script.
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -10,6 +10,7 @@ This project requires a DynamoDB table named `TesinaNetworkScenarioLambda` to be
   - [Step 1: Create the DynamoDB Table in On-Demand Mode](#step-1-create-the-dynamodb-table-in-on-demand-mode)
   - [Step 2: Add Initial Record](#step-2-add-initial-record)
   - [Step 3: Verify the Item in DynamoDB](#step-3-verify-the-item-in-dynamodb)
+- [Deploying the Application](#deploying-the-application)
 - [Troubleshooting](#troubleshooting)
 
 ---
@@ -20,28 +21,29 @@ This project requires a DynamoDB table named `TesinaNetworkScenarioLambda` to be
 - **AWS CLI**: [Install](https://aws.amazon.com/cli/) and configure the AWS CLI if you want to create the table via CLI commands.
 - **Node.js**: [Install Node.js](https://nodejs.org/) (v20 or later) if it is not already installed.
 - **AWS SDK for JavaScript (v3)**: This project uses the AWS SDK v3 to interact with DynamoDB.
+- **Kubernetes Cluster**: A Kubernetes cluster must be set up and accessible via `kubectl`.
 
 ## Setup Instructions
 
 ### Step 1: Create the DynamoDB Table in On-Demand Mode
 
-If the `TesinaNetworkScenarioLambda` table does not exist, create it manually in the AWS Console or by using the AWS CLI in **on-demand mode**.
+If the `TesinaNetworkScenarioOpenFaaS` table does not exist, create it manually in the AWS Console or by using the AWS CLI in **on-demand mode**.
 
 **Using AWS CLI:**
 
 ```bash
 aws dynamodb create-table \
-    --table-name TesinaNetworkScenarioLambda \
+    --table-name TesinaNetworkScenarioOpenFaaS \
     --attribute-definitions AttributeName=id,AttributeType=S \
     --key-schema AttributeName=id,KeyType=HASH \
     --billing-mode PAY_PER_REQUEST
 ```
 
-This command creates the `TesinaNetworkScenarioLambda` table with **on-demand billing**, where you are only charged for the read and write requests you use.
+This command creates the `TesinaNetworkScenarioOpenFaaS` table with **on-demand billing**, where you are only charged for the read and write requests you use.
 
 ### Step 2: Add Initial Record
 
-To add a sample record to the `TesinaNetworkScenarioLambda` table, you can use the following steps.
+To add a sample record to the `TesinaNetworkScenarioOpenFaaS` table, you can use the following steps.
 
 #### 1. Navigate to the aux script directory
 
@@ -70,15 +72,23 @@ If the script runs successfully, it will log a message with the `id` and `random
 To confirm that the item was successfully added to your DynamoDB table:
 
 1. Go to the [DynamoDB Console](https://console.aws.amazon.com/dynamodb/).
-2. Navigate to **Tables** > `TesinaNetworkScenarioLambda`.
+2. Navigate to **Tables** > `TesinaNetworkScenarioOpenFaaS`.
 3. Select **Explore Table** to view the contents of the table and verify that the record with the specified `id` exists.
 
 ---
 
+# Deploying the Application
+
+Execute the `deploy.sh` script:
+
+```bash
+./deploy.sh
+```
+
 ## Troubleshooting
 
 - **AWS Credentials**: If you get an access error, ensure that your AWS credentials are properly configured. You can configure them using:
-  
+
   ```bash
   aws configure
   ```
