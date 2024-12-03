@@ -31,5 +31,5 @@ echo $PASSWORD | faas-cli login --username admin --password-stdin
 faas-cli deploy -f tesina-scenario-network.yml
 
 # Create secrets
-aas-cli secret create dynamodb-access-key-id --from-file=./DYNAMODB_ACCESS_KEY_ID.txt
+faas-cli secret create dynamodb-access-key-id --from-file=./DYNAMODB_ACCESS_KEY_ID.txt
 faas-cli secret create dynamodb-secret-access-key --from-file=./DYNAMODB_SECRET_ACCESS_KEY.txt
