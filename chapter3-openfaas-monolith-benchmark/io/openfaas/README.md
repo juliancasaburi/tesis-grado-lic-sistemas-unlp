@@ -1,4 +1,3 @@
-
 # Setup and deployment
 
 This project requires a DynamoDB table named `TesinaNetworkScenarioOpenFaaS` to be created beforehand in on-demand mode and a sample record. Follow the instructions below to set up the table and add the record. Once the DynamoDB setup is complete, you can deploy the application to Kubernetes using the provided deployment script.
@@ -22,6 +21,7 @@ This project requires a DynamoDB table named `TesinaNetworkScenarioOpenFaaS` to 
 - **Node.js**: [Install Node.js](https://nodejs.org/) (v20 or later) if it is not already installed.
 - **AWS SDK for JavaScript (v3)**: This project uses the AWS SDK v3 to interact with DynamoDB.
 - **Kubernetes Cluster**: A Kubernetes cluster must be set up and accessible via `kubectl`.
+- **OpenFaaS CLI**: [Install the OpenFaaS CLI](https://docs.openfaas.com/cli/install/).
 
 ## Setup Instructions
 
